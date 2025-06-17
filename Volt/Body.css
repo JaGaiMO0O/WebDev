@@ -1,0 +1,104 @@
+html {
+    background-color: #1C0302;
+    color: white;
+    font-family: rubik;
+}
+
+
+.art {
+    display: flex;
+}
+
+.middle-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 120px;
+    gap: 20px;
+}
+
+.bio {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    padding-left: 94px;
+}
+
+
+.display {
+    width: 695px;
+    height: 473px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.desc {
+    font-weight: 400;
+    font-size: 24px;
+    height: 84px;
+    width: 415px;
+    letter-spacing: 15.3%;
+    text-justify: inter-word;
+    text-align: justify;
+}
+
+.brand-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 96px;
+    width: 250px;
+    letter-spacing: 11.5%;
+    height: 114px;
+    font-weight: 400;
+    gap: 10px;
+
+}
+
+.Bolt-img {
+    width: 39px;
+    height: 91.37px;
+    padding-right: 4px;
+
+}
+
+
+@media only screen and (max-width: 1500px) {
+    .middle-section {
+        flex-direction: column-reverse;
+    }
+
+    .display {
+
+        height: 100%;
+        width: 1040%;
+    }
+
+    .art{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brand-name{
+        font-size: 350%;
+        justify-content: end;
+    }
+    
+    .Bolt-img {
+        height: 50px;
+        width: 22px;
+    }
+
+    .desc {
+        font-size: 24px;
+        text-justify: inter-word;
+        text-align: justify;
+        letter-spacing: 28%;
+    }
+
+    
+}
+
+@media only screen and (min-width: 1501px) {}

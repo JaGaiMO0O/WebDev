@@ -1,0 +1,36 @@
+input {
+    border-width: 2px;
+    border-radius: 2px;
+    border-color: gray;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 20px;
+}
+
+.name {
+    width: 130px;
+}
+
+.email {
+    display: block;
+    width: 290px;
+}
+
+button {
+    background-color: deepskyblue;
+    color: white;
+    border: none;
+    width: 315px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 20px;
+}

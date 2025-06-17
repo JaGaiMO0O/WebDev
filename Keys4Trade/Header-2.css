@@ -1,0 +1,170 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    width: 1112px;
+    min-width: 900px;
+}
+
+.left-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-grow: 1;
+}
+
+.blue {
+    color: rgba(14, 165, 250, 1);
+}
+
+.right-head {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 60px;
+    flex-grow: 8;
+}
+
+.Links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-family: Bai Jamjuree;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: right;
+
+}
+
+.logo-placeholder {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23979AACFF' stroke-width='1' stroke-dasharray='14' stroke-dashoffset='5' stroke-linecap='square'/%3e%3c/svg%3e");
+    font-family: Bai Jamjuree;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    color: rgba(151, 154, 172, 1);
+}
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.Sign-In {
+    clip-path: polygon(28.28px 40px, 40px 40px, 40px 11.72px, 28.28px 0px, 11.72px 0px, 0px 0px, 0px 28.28px, 11.72px 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: Bai Jamjuree;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+
+}
+
+.Account-Name {
+    display: flex;
+    justify-content: center;
+    font-family: Bai Jamjuree;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    flex-direction: column;
+    color: rgba(151, 154, 172, 1);
+}
+
+.Account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.Menu-Border {
+    display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+    .Menu {
+        display: flex;
+        clip-path: polygon(70.71% 100%, 100% 100%, 100% 29.29%, 70.71% 0%, 29.29% 0%, 0% 0%, 0% 70.71%, 29.29% 100%);
+        background-color: rgba(255, 255, 255, 1);
+        height: 36px;
+        width: 36px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Menu-Border {
+        clip-path: polygon(70.71% 100%, 100% 100%, 100% 29.29%, 70.71% 0%, 29.29% 0%, 0% 0%, 0% 70.71%, 29.29% 100%);
+        background-color: rgba(218, 221, 239, 1);
+        width: 40px;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+
+    }
+
+    .Menu-Gray {
+        display: flex;
+        clip-path: polygon(70.71% 100%, 100% 100%, 100% 29.29%, 70.71% 0%, 29.29% 0%, 0% 0%, 0% 70.71%, 29.29% 100%);
+        background-color: rgba(233, 235, 250, 1);
+        height: 36px;
+        width: 36px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-media {
+        display: none;
+    }
+
+    .header {
+        justify-content: center;
+        min-width: 370px;
+    }
+
+    .left-head {
+        /* gap: 45px; */
+        max-width: 285px;
+    }
+
+    .right-head {
+        max-width: 85px;
+    }
+
+    .Links {
+        display: none;
+    }
+
+    .Dark-Mode {
+        display: none;
+    }
+
+    .Account-Name {
+        display: none;
+    }
+
+    .Expand {
+        display: none;
+    }
+
+}

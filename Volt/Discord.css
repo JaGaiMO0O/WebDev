@@ -1,0 +1,108 @@
+.Bottom {
+    padding-top: 366px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    bottom: 0;
+}
+
+.Discord {
+    width: 1118px;
+    height: 255px;
+    border-radius: 120px;
+    background-color: #BD0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: Rubik;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 11.5%;
+    text-align: center;
+    gap: 16px;
+    line-height: 50px;
+    padding-top: 20px;
+    /* position: absolute; */
+    /* bottom: 241px; */
+}
+
+.logo-bottom {
+    /* position: absolute; */
+    bottom: 76px
+}
+
+.CopyRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Rubik;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 11.5%;
+    text-align: center;
+
+}
+
+.Bottom-Front {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+    position: absolute;
+    padding-bottom: 50px;
+    width: 100%;
+}
+
+.Dark-Red {
+    background-color: #7E010033;
+    width: 100%;
+    height: 386px;
+    bottom: 0;
+    /* left: 0; */
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    position: absolute;
+    z-index: -100;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 1500px) {
+    .Dark-Red {
+        width: 100%;
+        height: 212px;
+    }
+
+    .CopyRight{
+        font-size: 14px;
+    }
+
+    .logo-bottom {
+        height: 76px;
+        width: 76.5px;
+        padding-top: 10px;
+    }
+
+    .Discord {
+        font-size: 18px;
+        width: 700px;
+        height: 125px;
+        gap: 11px;
+        line-height: 22px;
+    }
+
+    .Discord-Icon {
+        width: 56px;
+        height: 56px;
+
+    }
+
+    
+}

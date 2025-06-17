@@ -1,0 +1,14 @@
+.Title {
+    font-family: montserrat;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.underlined {
+    text-decoration: underline;
+}
+
+p {
+    font-family: montserrat;
+}

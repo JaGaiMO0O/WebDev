@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Model Canvas Summary</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+        }
+        .canvas-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .grid-item {
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+            min-height: 200px; /* Ensure consistent height */
+            display: flex;
+            flex-direction: column;
+        }
+        .grid-item:hover {
+            transform: translateY(-5px);
+        }
+        .grid-item h2 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 8px;
+        }
+        .grid-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+        }
+        .grid-item ul li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #555;
+        }
+        .grid-item ul li:last-child {
+            margin-bottom: 0;
+        }
+        /* Specific grid item spans for BMC layout */
+        .key-partners { grid-column: 1 / 2; }
+        .key-activities { grid-column: 2 / 3; }
+        .value-proposition { grid-column: 3 / 4; }
+        .customer-relationships { grid-column: 4 / 5; }
+        .customer-segments { grid-column: 5 / 6; }
+        .key-resources { grid-column: 2 / 3; grid-row: 2 / 3; }
+        .channels { grid-column: 4 / 5; grid-row: 2 / 3; }
+        .cost-structure { grid-column: 1 / 3; grid-row: 3 / 4; }
+        .revenue-streams { grid-column: 4 / 6; grid-row: 3 / 4; }
+
+        /* Adjusting for the middle row layout */
+        .value-proposition-span { grid-column: 3 / 4; grid-row: 1 / 3; display: flex; flex-direction: column; justify-content: center; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .grid-item, .value-proposition-span {
+                grid-column: auto / auto;
+                grid-row: auto / auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="canvas-container">
+        <h1>Business Model Canvas: AI-Integrated Lip Tracking Web Application</h1>
+        <div class="grid-container">
+            <div class="grid-item key-partners">
+                <h2>1. Key Partners</h2>
+                <ul>
+                    <li>Medical/Speech Professionals, Patient Support Groups</li>
+                    <li>Open-source communities (TensorFlow, MediaPipe)</li>
+                </ul>
+            </div>
+            <div class="grid-item key-activities">
+                <h2>2. Key Activities</h2>
+                <ul>
+                    <li>AI Model Development & Refinement (Lip Reading)</li>
+                    <li>Web App Development & Maintenance (Health Tracking, Phrase Library)</li>
+                    <li>Data Collection & Preprocessing</li>
+                </ul>
+            </div>
+            <div class="grid-item value-proposition value-proposition-span">
+                <h2>3. Value Proposition</h2>
+                <ul>
+                    <li>Improves communication for speech-impaired (Laryngeal Cancer patients)</li>
+                    <li>Predicts Arabic words from lip movements</li>
+                    <li>Provides psychological benefit & health tracking; Arabic language support</li>
+                </ul>
+            </div>
+            <div class="grid-item customer-relationships">
+                <h2>4. Customer Relationships</h2>
+                <ul>
+                    <li>Personal Assistance, Community, Self-Service, Automated Reminders</li>
+                </ul>
+            </div>
+            <div class="grid-item customer-segments">
+                <h2>5. Customer Segments</h2>
+                <ul>
+                    <li>Laryngeal Cancer patients (primary), other speech-impaired individuals</li>
+                    <li>Caregivers, Medical Institutions</li>
+                </ul>
+            </div>
+            <div class="grid-item key-resources">
+                <h2>6. Key Resources</h2>
+                <ul>
+                    <li>AI Model (CNN-RNN), Arabic Lip-Reading Dataset</li>
+                    <li>AI/Web Development Talent, Cloud Infrastructure</li>
+                </ul>
+            </div>
+            <div class="grid-item channels">
+                <h2>7. Channels</h2>
+                <ul>
+                    <li>Web Application (primary)</li>
+                    <li>Medical Referrals, Patient Advocacy Groups</li>
+                </ul>
+            </div>
+            <div class="grid-item cost-structure">
+                <h2>8. Cost Structure</h2>
+                <ul>
+                    <li>R&D (AI model, features)</li>
+                    <li>Infrastructure (servers, cloud)</li>
+                    <li>Personnel (developers, researchers)</li>
+                    <li>Data Acquisition</li>
+                </ul>
+            </div>
+            <div class="grid-item revenue-streams">
+                <h2>9. Revenue Streams (Future Considerations)</h2>
+                <ul>
+                    <li>Subscription/Freemium Models</li>
+                    <li>Partnerships with Healthcare Providers</li>
+                    <li>Grants/Donations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

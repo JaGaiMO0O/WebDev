@@ -1,0 +1,184 @@
+.Sidebar {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 334px;
+    position: fixed;
+    background-color: #300302;
+    padding-top: 5px;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    gap: 85px;
+    align-items: start;
+}
+
+.Header {
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 130px;
+    position: fixed;
+    background-color: #300302;
+    padding-top: 5px;
+    padding-right: 20px;
+    z-index: 101;
+    display: flex;
+    /* flex-direction: column; */
+    gap: 85px;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 97px;
+    height: 96px;
+    padding-left: 15px;
+}
+
+.Bolt {
+    width: 17px;
+    height: 40px;
+}
+
+.Test {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.Account {
+    font-size: 30px;
+    padding-left: 26px;
+    gap: 60px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.Main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 400px;
+    padding-top: 60px;
+    gap: 70px;
+}
+
+.Table {
+    background-color: #BD0000;
+    width: 1464px;
+    height: 448px;
+    border-radius: 20px;
+    border-width: 1px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    font-size: 30px;
+    /* gap: 20px; */
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    grid-template-rows: 50px 10px;
+}
+
+
+
+/* .T-Row {
+    display: flex;
+    gap: 89px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 1345px;
+} */
+
+
+.Rectangle {
+    width: 1418px;
+    height: 2px;
+    background-color: white;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    justify-self: center !important;
+}
+
+.Eyeball {
+    width: 48px;
+    height: 48px;
+}
+
+.Table div,
+img {
+    justify-self: start;
+}
+
+.Align {
+    padding-left: 63px;
+}
+
+
+@media screen and (max-width: 1500px) {
+    .Sidebar {
+        display: none;
+    }
+
+    .Test {
+        font-size: 32px;
+        letter-spacing: 6px;
+        gap: 6px;
+    }
+
+    .Bolt {
+        width: 14px;
+        height: 30px;
+    }
+
+    .Account {
+        font-size: 24px;
+    }
+
+    .Account img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .Main {
+        padding-left: 100px;
+        padding-top: 150px;
+        gap: 40px;
+    }
+
+    .Table {
+        /* grid-template-rows: 30px 10px; */
+        font-size: 22px;
+        width: 800px;
+    }
+
+    .Eyeball {
+        width: 32px;
+        height: 32px;
+    }
+
+    .Account {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .Nike {
+        font-size: 32px;
+    }
+
+    .Rectangle {
+        width: 750px;
+    }
+
+
+}
+
+@media screen and (min-width: 1501px) {
+    .Header {
+        display: none;
+    }
+}

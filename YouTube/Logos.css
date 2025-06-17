@@ -1,0 +1,226 @@
+.hamburger-menu {
+    height: 25px;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.youtube-logo {
+    height: 20px;
+}
+
+.mic-button {
+    height: 38px;
+    width: 40px;
+    border: none;
+    background-color: rgb(240, 240, 240);
+    border-radius: 50px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.mic-button .tooltip {
+    position:absolute;
+    background-color: rgb(170, 170, 170);
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+    border-radius: 4px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.mic-icon {
+    height: 26px;
+    margin-top: 4px;
+}
+
+.mic-button:hover .tooltip {
+    opacity: 1;
+}
+
+.tooltip {
+    font-family: roboto, arial;
+    font-size: 12px;
+}
+
+.search-button {
+    height: 38px;
+    width: 65px;
+    background-color: rgb(240, 240, 240);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(170, 170, 170);
+    margin-left: -1px;
+    position: relative;
+        
+}
+
+.search-button .tooltip {
+    position:absolute;
+    background-color: rgb(170, 170, 170);
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+    border-radius: 4px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.search-button:hover .tooltip {
+    opacity: 1;
+}
+
+.search-icon{
+    height: 26px;
+    margin-top: 4px;
+}
+
+.search-bar {
+    flex: 1;
+    height: 34px;
+    padding-left: 10px;
+    font-size: 15px;
+    font-family: roboto, Arial;
+    border-width: 1px;
+    border-color: rgb(170, 170, 170);
+    border-style: solid;
+    border-radius: 2px;
+    width: 0;
+    box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar::placeholder {
+    font-family: roboto, Arial;
+    font-size: 15px;
+}
+
+.upload-icon {
+    height: 34px;
+    width: 34px;
+    background-color: white;
+    border: none;
+    position: relative;
+}
+
+
+.upload-icon .tooltip {
+    position:absolute;
+    background-color: rgb(170, 170, 170);
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+    border-radius: 4px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.apps-icon {
+    height: 34px;
+    width: 34px;
+    background-color: white;
+    border: none;
+    position: relative;
+}
+
+.apps-icon .tooltip {
+    position:absolute;
+    background-color: rgb(170, 170, 170);
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+    border-radius: 4px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.apps-icon:hover .tooltip {
+    opacity: 1;
+}
+
+.upload-icon:hover .tooltip {
+    opacity: 1;
+}
+
+
+.notification-icon {
+    height: 34px;
+    width: 34px;
+    background-color: white;
+    border: none;
+    position: relative;
+}
+
+.notification-icon .tooltip {
+    position:absolute;
+    background-color: rgb(170, 170, 170);
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border: none;
+    border-radius: 4px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.notification-icon:hover .tooltip {
+    opacity: 1;
+}
+
+.account-icon {
+    height: 30px;
+
+}
+
+.notification-count {
+    top: -2px;
+    right: -2px;
+    position:absolute;
+    background-color: rgb(180, 0, 0);
+    color: white;
+    font-family: roboto, Arial;
+    font-size: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border: none;
+    border-radius: 20px;
+}
+
+.notification-container {
+    position:relative;
+}
+
+.mic-button, .search-bar, .upload-icon, .apps-icon, .notification-container {
+    display: flex;
+    justify-content: center;
+}

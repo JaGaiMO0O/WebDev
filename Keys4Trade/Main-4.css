@@ -1,0 +1,361 @@
+html {
+    background-color: rgba(233, 235, 250, -1);
+    font-family: bai jamjuree;
+}
+
+.Screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 200px 40px 200px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(233, 235, 250, 1));
+    position: relative;
+    gap: 120px;
+}
+
+.Back-Net {
+    z-index: -2;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.Receipt {
+    clip-path: polygon(0px 436px, 0px 634px, 512px 634px, 512px 436px, 496.73px 423px, 512px 410px, 512px 0px, 0px 0px, 0px 410px, 15.27px 423px);
+    background-color: rgb(255, 255, 255);
+    height: 634px;
+    width: 512px;
+    box-shadow: 0px 2px 10px 0px rgba(23, 24, 27, 0.04);
+}
+
+.Receipt-Inside {
+    padding: 30px;
+
+}
+
+.R-Num {
+    font-family: Bai Jamjuree;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.You-Bought {
+    font-family: Bai Jamjuree;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    color: rgba(151, 154, 172, 1);
+    padding-top: 30px;
+}
+
+.Key {
+    clip-path: polygon(80px 80px, 80px 56.57px, 80px 23.43px, 56.57px 0px, 0px 0px, 0px 23.43px, 0px 56.57px, 23.43px 80px);
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    top: 2px;
+    left: 2px;
+    min-width: 76px;
+    min-height: 76px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+
+}
+
+.Border {
+    clip-path: polygon(80px 80px, 80px 56.57px, 80px 20px, 61px 0px, 0px 0px, 0px 23.43px, 0px 59px, 21px 80px);
+    min-width: 82px;
+    min-height: 82px;
+    position: relative;
+    background: rgba(218, 221, 239, 1);
+    box-sizing: border-box;
+}
+
+.Key-Type {
+    padding-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.Desc {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.Txt-1 {
+    font-family: Bai Jamjuree;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+
+}
+
+.Txt-2 {
+    font-family: Bai Jamjuree;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    color: rgba(151, 154, 172, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 100%; */
+    gap: 10px;
+}
+
+.Txt-4 {
+    font-family: Bai Jamjuree;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0%;
+    color: rgba(151, 154, 172, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.Dash {
+    width: 20px;
+    height: 1px;
+    background-color: rgba(233, 235, 250, 1);
+}
+
+.Payment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.Gap-1 {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.Gap-2 {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.Card {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 33px;
+}
+
+.Card-Mini {
+    display: none;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 33px;
+}
+
+.Card-Details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.Long-Dash {
+    width: 452px;
+    height: 1px;
+    background-color: rgba(233, 235, 250, 1);
+}
+
+.Product {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    gap: 10px;
+    padding-bottom: 30px;
+}
+
+.Product-Name {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Promo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.Plus {
+    width: 12px;
+    height: 12px;
+}
+
+.Dashed-Dash {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23E9EBFAFF' stroke-width='4' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    background-color: white;
+    height: 1px;
+    width: 452px;
+}
+
+.Total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 36px;
+}
+
+.Txt-3 {
+    font-family: Bai Jamjuree;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    text-align: right;
+
+}
+
+.Return {
+    clip-path: polygon(70.71% 100%, 100% 100%, 100% 29.29%, 86.77% 0%, 29.29% 0%, 0% 0%, 0% 70.71%, 10.96% 100%);
+    background-color: rgba(218, 221, 239, 1);
+    height: 52px;
+    width: 132px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Bai Jamjuree;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0%;
+    text-align: center;
+    /* margin-top: -40px; */
+    position: relative;
+    box-sizing: border-box;
+}
+
+.Box {
+    clip-path: polygon(70.71% 100%, 100% 100%, 100% 29.29%, 86.77% 0%, 29.29% 0%, 0% 0%, 0% 70.71%, 10.96% 100%);
+    background-color: rgba(233, 235, 250, 1);
+    height: 48px;
+    width: 128px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .Screen {
+        gap: 80px;
+    }
+
+    .Receipt-Inside {
+        padding: 20px;
+    }
+
+    .Receipt {
+        height: 678px;
+        width: 360px;
+        clip-path: polygon(0px 460px, 0px 678px, 360px 678px, 360px 460px, 346px 447px, 360px 434px, 360px 0px, 0px 0px, 0px 434px, 14px 447px);
+    }
+
+    .Desc .Dash {
+        display: none;
+    }
+
+    .Long-Dash {
+        width: 320px;
+    }
+
+    .Card-Mini {
+        padding-bottom: 22px;
+        gap: 10px;
+        display: flex;
+    }
+
+    .Card {
+        display: none;
+    }
+
+    .Card-Details {
+        /* flex-direction: column; */
+        align-items: center;
+        gap: 10px;
+
+    }
+
+    .Dashed-Dash {
+        width: 320px;
+    }
+
+    .Gap-1 {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .Product-Name .Txt-2 {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .Product-Name {
+        gap: 20px;
+    }
+
+    .Screen {
+        padding-bottom: 20px;
+    }
+
+    .New-Line {
+        width: 194px;
+    }
+
+    .Return {
+        width: 368px;
+        min-height: 52px;
+        clip-path: polygon(260.92px 52px, 370px 52px, 370px 14px, 358px 0px, 108.08px 0px, 0px 0px, 0px 38px, 12px 52px);
+    }
+
+    .Box {
+        width: 364px;
+        clip-path: polygon(260.92px 52px, 370px 52px, 370px 16px, 356px 0px, 108.08px 0px, 0px 0px, 0px 36px, 14px 52px);
+    }
+
+    .Scroll {
+        overflow-y: scroll;
+        min-height: 678px;
+        overflow-x: hidden;
+        margin-top: -40px;
+        max-height: 678px;
+        scrollbar-width: none;
+    }
+
+
+
+}

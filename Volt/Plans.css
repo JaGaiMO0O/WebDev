@@ -1,0 +1,204 @@
+.Product {
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 11.5%;
+}
+
+.Plans-Section {
+    padding-top: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+}
+
+.Plans-Section-2 {
+    padding-top: 400px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+}
+
+.Top{
+    display: flex;
+    gap: 28px;
+}
+
+.Plan-Picker {
+    display: flex;
+    gap: 28px;
+
+}
+
+
+.Plan-Picker-2 {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    align-items: center;
+}
+
+.Plans {
+    width: 324px;
+    height: 621px;
+    border-radius: 15px;
+    background-color: #BD0000;
+    letter-spacing: 11.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    gap: 30px;
+    padding: 30px;
+}
+
+.Plan-Type {
+    font-size: 38px;
+    width: 268px;
+}
+
+.Plan-Price {
+    font-size: 60px;
+    width: 268px;
+}
+
+.ISP {
+    font-size: 24px;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    width: 256px;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 12px;
+}
+
+.Buy-Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    border: 1px solid #FFFFFF;
+    border-radius: 15px;
+    width: 268px;
+    height: 84px;
+}
+
+.Rectangle {
+    background-color: white;
+    height: 1px;
+    width: 299px;
+}
+
+.Features-Word {
+    font-size: 20px;
+    width: 268px;
+}
+
+.Features {
+    font-size: 15px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 22px;
+    /* width: 268px; */
+}
+
+.FAQ {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 223px;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.FAQ-Word {
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 11.5%;
+
+}
+
+
+.Red {
+    background-color: #BD0000;
+    border-radius: 10px;
+    width: 1118px;
+    height: 60px;
+    font-family: Rubik;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 11.5%;
+    padding-left: 14px;
+    /* padding-top: 6px; */
+    /* gap: 799px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.Red-Border {
+    width: 1118px;
+    height: 164px;
+    border: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: #BD0000;
+    font-family: Rubik;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 11.5%;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    gap: 25px;
+    padding-left: 14px;
+    /* padding-top: 6px; */
+}
+
+.arrows {
+    width: 28px;
+    height: 28px;
+    padding-right: 12px;
+}
+
+@media screen and (max-width: 1500px) {
+    .Product {
+        font-size: 28px;
+    }
+
+    .Plan-Picker {
+        display: none;
+    }
+
+    .Plan-Picker-2 {
+        flex-direction: column;
+    }
+
+    .Plans-Section {
+        display: none;
+    }
+
+    .Plans-Section-2 {
+        display: flex;
+    }
+
+    .Red {
+        width: 600px;
+        justify-content: space-between;
+    }
+
+    .Red-Border {
+        width: 600px;
+    }
+}

@@ -1,0 +1,34 @@
+.user {
+    padding: 4px;
+}
+
+.order {
+    padding: 3px;
+    border: 2px solid rgb(196, 246, 187);
+    background-color: rgb(32, 78, 67);
+    color: white;
+    border-radius: 20px;
+    width: 120px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.tabs {
+    /* padding: 4px; */
+    font-size: 14px;
+
+    
+}
+
+.brand {
+    padding: 3px;
+}
+
+img {
+    width: 60px;
+    height: 60px;
+}
+
+.user, .logo {
+    cursor: pointer;
+}
