@@ -1,0 +1,61 @@
+body {
+    background-color: rgba(7, 14, 25, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+h1 {
+    width: 180px;
+    height: 58px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 0.969);
+}
+
+img {
+    width: 200px;
+    height: 300px;
+}
+
+.inputs {
+    display: flex;
+    gap: 32px;
+}
+
+.searchBox {
+    width: 632px;
+    height: 48px;
+    border-radius: 20px;
+    background-color: rgba(217, 217, 217, 1);
+}
+
+.filter {
+    width: 300px;
+    height: 48px;
+    background-color: rgba(217, 217, 217, 1);
+}
+
+.people {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
+    color: white;
+    gap: 32px;
+}
+
+.male,
+.female {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(104, 110, 218, 0.41);
+    width: 300px;
+    height: 357px;
+    border-radius: 10px;
+    align-items: center;
+}
