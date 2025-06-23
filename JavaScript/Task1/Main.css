@@ -36,6 +36,9 @@ img {
 }
 
 .filter {
+    display:flex ;
+    align-items: center;
+justify-content: center;
     width: 300px;
     height: 48px;
     background-color: rgba(217, 217, 217, 1);
@@ -49,8 +52,7 @@ img {
     gap: 32px;
 }
 
-.male,
-.female {
+.WarFrame{
     display: flex;
     flex-direction: column;
     background-color: rgba(104, 110, 218, 0.41);
@@ -59,3 +61,60 @@ img {
     border-radius: 10px;
     align-items: center;
 }
+
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.dropdown-toggle {
+    padding: 10px 20px;
+    width: 300px;
+    height: 48px;
+    background: rgba(217, 217, 217, 1);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 150px;
+    text-align: left;
+    position: relative;
+}
+
+.dropdown-toggle:after {
+    content: "▼";
+    font-size: 10px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #f5f5f5;
+}
+
