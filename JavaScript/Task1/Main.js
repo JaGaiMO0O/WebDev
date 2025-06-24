@@ -1,5 +1,6 @@
 import { frames } from "./Warframes.js";
 
+/*
 let currentGenderFilter = 'All';
 let currentSearchTerm = '';
 
@@ -88,81 +89,69 @@ document.addEventListener('DOMContentLoaded', () => {
     
     applyFilters();
 });
+*/
 
 
 
+function createGenderDropdown() {
+    const dropdownContainer = document.createElement('div');
+    dropdownContainer.className = 'custom-dropdown';
 
-// function createGenderDropdown() {
-//     const dropdownContainer = document.createElement('div');
-//     dropdownContainer.className = 'custom-dropdown';
+    const dropdownBtn = document.createElement('button');
+    dropdownBtn.className = 'dropdown-toggle';
+    dropdownBtn.textContent = 'Filter by Gender';
+    dropdownContainer.appendChild(dropdownBtn);
 
-//     const dropdownBtn = document.createElement('button');
-//     dropdownBtn.className = 'dropdown-toggle';
-//     dropdownBtn.textContent = 'Filter by Gender';
-//     dropdownContainer.appendChild(dropdownBtn);
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.className = 'dropdown-menu';
 
-//     const dropdownMenu = document.createElement('div');
-//     dropdownMenu.className = 'dropdown-menu';
+    const options = ['All', 'Male', 'Female'];
+    options.forEach(option => {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'dropdown-item';
+        menuItem.textContent = option;
+        menuItem.dataset.gender = option;
+        menuItem.addEventListener('click', () => {
+            dropdownBtn.textContent = option;
+            filterByGender(option);
+            dropdownMenu.classList.remove('show');
+        });
+        dropdownMenu.appendChild(menuItem);
+    });
 
-//     const options = ['All', 'Male', 'Female'];
-//     options.forEach(option => {
-//         const menuItem = document.createElement('div');
-//         menuItem.className = 'dropdown-item';
-//         menuItem.textContent = option;
-//         menuItem.dataset.gender = option;
-//         menuItem.addEventListener('click', () => {
-//             dropdownBtn.textContent = option;
-//             filterByGender(option);
-//             dropdownMenu.classList.remove('show');
-//         });
-//         dropdownMenu.appendChild(menuItem);
-//     });
-
-//     dropdownContainer.appendChild(dropdownMenu);
-
-
-//     dropdownBtn.addEventListener('click', () => {
-//         dropdownMenu.classList.toggle('show');
-//     });
+    dropdownContainer.appendChild(dropdownMenu);
 
 
-//     document.addEventListener('click', (e) => {
-//         if (!dropdownContainer.contains(e.target)) {
-//             dropdownMenu.classList.remove('show');
-//         }
-//     });
-
-//     document.querySelector('.inputs').appendChild(dropdownContainer);
-// }
-
-// function renderFrames(framesToRender = frames) {
-//     const grid = document.getElementById('table');
-//     grid.innerHTML = '';
-
-//     framesToRender.forEach((frame) => {
-//         grid.innerHTML += `
-//         <div class="WarFrame" id="${frame.id}">
-//             <img src="${frame.image}">
-//             <span>Name: ${frame.name}</span>
-//             <span>Gender: ${frame.gender}</span>
-//         </div>
-//         `;
-//     });
-// }
+    dropdownBtn.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('show');
+    });
 
 
+    document.addEventListener('click', (e) => {
+        if (!dropdownContainer.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
 
+    document.querySelector('.inputs').appendChild(dropdownContainer);
+}
 
-// function filterFrames() {
-//     const nameSearch = document.getElementById('name').value.toLowerCase();
+function renderFrames(framesToRender = frames) {
+    const grid = document.getElementById('table');
+    grid.innerHTML = '';
 
-//     const filtered = frames.filter(frame => {
-//         const matchesName = frame.name.toLowerCase().includes(nameSearch);
-//         return matchesName;
-//     });
+    framesToRender.forEach((frame) => {
+        grid.innerHTML += `
+        <div class="WarFrame" id="${frame.id}">
+            <img src="${frame.image}">
+            <span>Name: ${frame.name}</span>
+            <span>Gender: ${frame.gender}</span>
+        </div>
+        `;
+    });
+}
 
-//     renderFrames(filtered);
-// }
+let selectedGender = 'All';
 
 // function filterByGender(gender) {
 //     const filtered = gender === 'All'
@@ -171,12 +160,33 @@ document.addEventListener('DOMContentLoaded', () => {
 //     renderFrames(filtered);
 // }
 
-// function setupEventListeners() {
-//     document.getElementById('name').addEventListener('input', filterFrames);
-// }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     createGenderDropdown();
-//     renderFrames();
-//     setupEventListeners();
-// });
+function filterFrames(gender) {
+    const nameSearch = document.getElementById('name').value.toLowerCase();
+
+    const filteredName = frames.filter(frame => {
+        const matchesName = frame.name.toLowerCase().includes(nameSearch);
+        const matchesGender = selectedGender === 'All' || frame.gender === selectedGender;
+        return matchesName && matchesGender;
+    });
+
+    renderFrames(filteredName);
+}
+
+function filterByGender(gender) {
+    selectedGender = gender;
+    filterFrames();
+}
+
+function setupEventListeners() {
+    document.getElementById('name').addEventListener('input', filterFrames);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    createGenderDropdown();
+    renderFrames();
+    setupEventListeners();
+});
+
+
+
