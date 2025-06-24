@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Main.css" rel="stylesheet">
+</head>
+
+<body>
+    <button onclick="login()">Login</button>
+
+
+    <label>Username:</label>
+    <input type="text" id="username" required />
+    <label>Password:</label>
+    <input type="password" id="password" required />
+
+    <div id="message"></div>
+
+
+    <script>
+        const users = [
+            { username: 'admin', password: '1234', role: 'admin' },
+            { username: 'user1', password: '123', role: 'user' }
+        ];
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                console.log("success")
+
+                if (user.role === 'admin') {
+                    console.log('admin')
+
+                    localStorage.setItem('userRole', user.role);
+                    window.location.href = 'Main.html';
+                }
+                else {
+                    console.log("user")
+                    localStorage.setItem("userRole", user.role);
+                    window.location.href = "Main.html";
+
+                }
+            }
+            else {
+                console.log("fail")
+            }
+        }
+    </script>
+</body>
+
+</html>

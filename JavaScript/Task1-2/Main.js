@@ -138,14 +138,7 @@ function setupEventListeners() {
 document.addEventListener('DOMContentLoaded', () => {
     createGenderDropdown();
     createPriceSelection();
-    renderFrames();
     setupEventListeners();
+    renderFrames();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('isAdmin') === 'true') {
-        const adminDiv = document.getElementById("frameBox");
-        adminDiv.classList.remove("Warframe");
-        adminDiv.classList.add("WarframeAdmin");
-    }
-})
