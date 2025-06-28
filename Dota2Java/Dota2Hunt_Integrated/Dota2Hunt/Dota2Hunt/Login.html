@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="Main.css">
+    <link rel="stylesheet" href="Sidebar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+    <style>
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        
+        .login-box {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            min-width: 400px;
+        }
+        
+        .login-logo {
+            margin-bottom: 30px;
+        }
+        
+        .login-logo img {
+            width: 150px;
+            height: auto;
+        }
+        
+        .login-title {
+            color: #d4af37;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        
+        .form-group label {
+            color: #ffffff;
+            font-family: 'Rubik', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .form-group input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #555;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Rubik', sans-serif;
+            font-size: 16px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            outline: none;
+        }
+        
+        .login-button {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            border: none;
+            border-radius: 8px;
+            color: #000000;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 20px;
+            padding: 15px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .login-button:hover {
+            background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .error-message {
+            color: #ff4444;
+            font-family: 'Rubik', sans-serif;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .success-message {
+            color: #44ff44;
+            font-family: 'Rubik', sans-serif;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-logo">
+                <img src="Images/Logo.png" alt="Dota2Hunt Logo">
+            </div>
+            
+            <h1 class="login-title">Login to Dota2Hunt</h1>
+            
+            <form class="login-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <button type="button" class="login-button" onclick="login()">Login</button>
+                
+                <div id="error-message" class="error-message"></div>
+                <div id="success-message" class="success-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const users = [
+            { username: 'admin', password: '1234', role: 'admin', displayName: 'Admin' },
+            { username: 'artheus', password: 'pass', role: 'user', displayName: 'Artheus' },
+            { username: 'daynm126x', password: 'pass', role: 'user', displayName: 'Daynm126x' }
+        ];
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+
+            if (!username || !password) {
+                showError('Please enter both username and password.');
+                return;
+            }
+
+            const user = users.find(user => user.username === username && user.password === password);
+
+            if (user) {
+
+                localStorage.setItem('userRole', user.role);
+                localStorage.setItem('username', user.username);
+                localStorage.setItem('displayName', user.displayName);
+                localStorage.setItem('isLoggedIn', 'true');
+
+                showSuccess('Login successful! Redirecting...');
+                
+                setTimeout(() => {
+                    window.location.href = 'HomePage.html';
+                }, 1500);
+            } else {
+                showError('Invalid username or password.');
+            }
+        }
+
+        function showError(message) {
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function showSuccess(message) {
+            const successMessage = document.getElementById('success-message');
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+        }
+
+
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                login();
+            }
+        });
+
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = 'HomePage.html';
+        }
+    </script>
+</body>
+
+</html>
+

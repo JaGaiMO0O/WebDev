@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="Header.css">
+    <link rel="stylesheet" href="Main.css">
+    <link rel="stylesheet" href="Sidebar.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <section class="Screen">
+        <div class="Header">
+            <div class="Logo">
+                <img src="Images/Logo.png">
+            </div>
+
+            <div class="Header-In">
+                <div class="Top-Head">
+                    <div class="Left-Head-Top">
+                        <span class="Gold-Text">LEADERBOARD</span>
+                        <span class="Green-Text">AFFILIATES</span>
+                    </div>
+
+                    <div class="Right-Head-Top">
+                        <span class="Gradiant-Gold-Text">FREE COINS</span>
+                        <span class="Gradiant-Grey-Text">PROVABLY FAIR</span>
+                        <span class="Gradiant-Grey-Text">TOS</span>
+                        <span class="Gradiant-Grey-Text">FAQ</span>
+                        <span class="Gradiant-Dark-Grey-Text" onclick="logout()" style="cursor: pointer;">LOG OUT</span>
+                    </div>
+                </div>
+
+                <div class="Bottom-Head">
+                    <div class="Left-Head-Bottom">
+                        <div class="Home">
+                            <img src="Images/House.png">
+                            <span>HOME</span>
+                        </div>
+                        <div class="Dashed-Line">
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                        </div>
+                        <div class="Upgrader">
+                            <img src="Images/ArrowUp.png">
+                            <span>UPGRADER</span>
+                        </div>
+                        <div class="Dashed-Line">
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                        </div>
+                        <div class="Cases">
+                            <img class="Grey-Image" src="Images/Box.png">
+                            <span>CASES</span>
+                        </div>
+                        <div class="Dashed-Line">
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                        </div>
+                        <div class="Case-Battles">
+                            <img class="Grey-Image" src="Images/Swords.png">
+                            <span>CASE BATTLES</span>
+                        </div>
+                        <div class="Dashed-Line">
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                            <div class="Dashes"></div>
+                        </div>
+                        <div class="King">
+                            <img src="Images/Crown.png">
+                            <span>KING</span>
+                        </div>
+                    </div>
+
+                    <div class="Right-Head-Bottom">
+                        <div class="Inventory">
+                            <img src="Images/Bag.png">
+                            <span>INVENTORY</span>
+                        </div>
+                        <div class="Deposit">
+                            <img src="Images/Dota2Icon.png">
+                            <span>DEPOSIT</span>
+                        </div>
+                        <div class="Account">
+                            <div class="Balance">
+                                <img src="Images/Dota2Icon.png">
+                                <span>101,150</span>
+                                <span class="Tiny">.00</span>
+                            </div>
+                            <div class="Profile">
+                                <div class="Border">
+                                    <img class="PFP" src="Images/Dota2Art.png">
+                                </div>
+
+                                <span>Artheus</span>
+                                <img src="Images/ArrowDown.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="Main-Body">
+            <div class="Sidebar">
+                <div class="Chat-Header">
+                    <div class="Online-People">
+                        <div class="Status"></div>
+                        <span>1,132</span>
+                    </div>
+                    <div class="Chat-Rules">Chat Rules</div>
+                    <div class="Region">
+                        <img src="Images/Region.png">
+                        <img src="Images/ArrowDown.png">
+                    </div>
+                </div>
+
+                <div class="Messages" id="messages-container">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+
+                <div class="Text-Box">
+                    <input type="text" id="chat-input" placeholder="Type a message..." style="background: transparent; border: none; color: white; width: 100%; outline: none; font-family: 'Rubik', sans-serif;">
+                    <div class="Icons">
+                        <img src="Images/Emoji.png">
+                        <img src="Images/Send.png" onclick="sendMessage()" style="cursor: pointer;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="Main-Screen">
+                <div class="Row-Clean">
+                    <div class="Background-Gold">
+                        <div class="Items4Sale">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Items-Crown" src="Images/Item's-Crown.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item.png">
+                                    </div>
+                                    <span class="Golden-Staff">Golden Staff of Perplex</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Gold">
+                        <div class="Items4Sale">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Items-Crown" src="Images/Item's-Crown.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item.png">
+                                    </div>
+                                    <span class="Golden-Staff">Golden Staff of Perplex</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Gold">
+                        <div class="Items4Sale">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Items-Crown" src="Images/Item's-Crown.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item.png">
+                                    </div>
+                                    <span class="Golden-Staff">Golden Staff of Perplex</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Background-Grey">
+                        <div class="Items4Sale-2">
+                            <!-- <img class="BackWaves" src="Images/Background-Waves.png"> -->
+                            <div>
+                                <img class="Green-Dot" src="Images/Green.png">
+                                <div class="Column">
+                                    <div class="Row">
+                                        <img class="Dota2Icon-2" src="Images/Dota2Icon.png">
+                                        <span class="Balance-2">1,150</span>
+                                        <span class="Tiny-2">.00</span>
+                                    </div>
+                                    <div class="Background-Art">
+                                        <img src="Images/Item-2.png">
+                                    </div>
+                                    <span class="Grey-Mask">Lash of the Lizard Kin of the Crimson Witness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- <div class="Scroll-Screen"> -->
+
+                <div class="Advertisment">
+                    <div class="Row-Ad-1">
+                        <div class="Advertisment-1"></div>
+                        <div class="Advertisment-2">
+                            <div class="Dots-1">
+                                <div class="Dot-1"></div>
+                                <div class="Dot-2"></div>
+                                <div class="Dot-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Row-Ad-2">
+                        <div class="Advertisment-3"></div>
+                        <div class="Advertisment-4"></div>
+                        <div class="Advertisment-5"></div>
+                    </div>
+                </div>
+
+                <div class="Bets">
+                    <div class="Bets-Header">
+                        <span class="All-Bets">ALL BETS</span>
+                        <span class="High-Rollers">HIGH ROLLERS</span>
+                        <span class="Lucky-Wins">LUCKY WINS</span>
+                        <span class="My-Bets">MY BETS</span>
+                    </div>
+                    <div class="Current-Bets">
+                        <div class="Grey-Text">USERNAME</div>
+                        <div class="Grey-Text">GAME</div>
+                        <div class="Grey-Text">TIME</div>
+                        <div class="Grey-Text">BET</div>
+                        <div class="Grey-Text">MULTIPLIER</div>
+                        <div class="Grey-Text">PROFIT</div>
+                        <div class="Username-Table">
+                            <img class="Bets-User" src="Images/D.png">
+                            <span class="Username-Bet">Daynm126x</span>
+                            <div class="LVL-Grey"><span>14</span></div>
+                        </div>
+                        <div class="Upgrader-Table">
+                            <img class="Red-Arrow" src="Images/Arrow-Up-Red.png">
+                            <span class="Upgrader-Text">UPGRADER</span>
+                        </div>
+                        <div>
+                            <span class="Time-Table">01:39 PM</span>
+                        </div>
+                        <div class="Bet-Amount">
+                            <img class="Dota-Bet" src="Images/Dota2Icon.png">
+                            <span class="White">1,150</span>
+                            <span class="Grey">.00</span>
+                        </div>
+                        <div class="Multiplier-Green">21.03x</div>
+                        <div class="Profit">
+                            <div class="Profit-Green"><span>+</span></div>
+                            <img class="Dota-Bet" src="Images/Dota2Icon.png">
+                            <span class="White">1,150</span>
+                            <span class="Grey">.00</span>
+                        </div>
+
+                        <div class="Username-Table">
+                            <img class="Bets-User" src="Images/D.png">
+                            <span class="Username-Bet">Daynm126x</span>
+                            <div class="LVL-Grey"><span>14</span></div>
+                        </div>
+                        <div class="Upgrader-Table">
+                            <img class="Red-Arrow" src="Images/Red-Box.png">
+                            <span class="Upgrader-Text">CASES</span>
+                        </div>
+                        <div>
+                            <span class="Time-Table">01:39 PM</span>
+                        </div>
+                        <div class="Bet-Amount">
+                            <img class="Dota-Bet" src="Images/Dota2Icon.png">
+                            <span class="White">150</span>
+                            <span class="Grey">.00</span>
+                        </div>
+                        <div class="Multiplier-Grey">1.03x</div>
+                        <div class="Profit">
+                            <div class="Profit-Red"><span>-</span></div>
+                            <img class="Dota-Bet" src="Images/Dota2Icon.png">
+                            <span class="White">1,150</span>
+                            <span class="Grey">.00</span>
+                        </div>
+
+                        <div class="Username-Table">
+                            <img class="Bets-User" src="Images/D.png">
+                            <span class="Username-Bet">Daynm126x</span>
+                            <div class="LVL-Grey"><span>14</span></div>
+                        </div>
+                        <div class="Upgrader-Table">
+                            <img class="Red-Arrow" src="Images/Red-Swords.png">
+                            <span class="Upgrader-Text">CASE BATTLES</span>
+                        </div>
+                        <div>
+                            <span class="Time-Table">01:39 PM</span>
+                        </div>
+                        <div class="Bet-Amount">
+                            <img class="Dota-Bet" src="Images/Dota2Icon.png">
+                            <span class="White">23,150</span>
+                            <span class="Grey">.00</span>
+                        </div>
+                        <div class="Multiplier-Green">21.03x</div>
+                        <div class="Profit">
+                            <div class="Profit-Green"><span>+</span></div>
+                            <img class="Dota-Bet" src="Images/Dota2Icon.png">
+                            <span class="White">1,150</span>
+                            <span class="Grey">.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- </div> -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function checkAuthentication() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn || isLoggedIn !== 'true') {
+                window.location.href = 'Login.html';
+                return false;
+            }
+            return true;
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            localStorage.removeItem('displayName');
+            window.location.href = 'Login.html';
+        }
+
+        function updateUserDisplay() {
+            const displayName = localStorage.getItem('displayName');
+            const userRole = localStorage.getItem('userRole');
+            
+            if (displayName) {
+                const profileNameElement = document.querySelector('.Profile span');
+                if (profileNameElement) {
+                    profileNameElement.textContent = displayName;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (checkAuthentication()) {
+                updateUserDisplay();
+                initializeChat();
+            }
+        });
+
+        function initializeChat() {
+            loadInitialMessages();
+            
+            const chatInput = document.getElementById('chat-input');
+            if (chatInput) {
+                chatInput.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+        }
+
+        function loadInitialMessages() {
+            const initialMessages = [
+                { username: 'artheus', displayName: 'Artheus', role: 'user', message: 'Hey this is a testing page', time: '11:04', level: 43 },
+                { username: 'artheus', displayName: 'Artheus', role: 'user', message: 'Welcome to Dota2Hunt!', time: '11:04', level: 43 },
+                { username: 'daynm126x', displayName: 'Daynm126x', role: 'user', message: 'Hey this is a testing message which is displayed in the chat and also Artheus is the best designer ever', time: '11:05', level: 14 },
+                { username: 'daynm126x', displayName: 'Daynm126x', role: 'user', message: 'Hey this is a testing message which is displayed in the chat', time: '11:05', level: 14 },
+                { username: 'admin', displayName: 'Lik K', role: 'admin', message: 'Owner\'s message...', time: '11:05', level: 99 },
+                { username: 'daynm126x', displayName: 'Daynm126x', role: 'user', message: 'Hey this is a testing message which is displayed in the chat', time: '11:05', level: 14 },
+                { username: 'artheus', displayName: 'Artheus', role: 'user', message: 'Hey this is a testing page', time: '11:04', level: 43 }
+            ];
+
+            initialMessages.forEach(msg => addMessage(msg.username, msg.displayName, msg.role, msg.message, msg.time, msg.level));
+        }
+
+        function sendMessage() {
+            const chatInput = document.getElementById('chat-input');
+            const message = chatInput.value.trim();
+            
+            if (!message) return;
+
+            const username = localStorage.getItem('username');
+            const displayName = localStorage.getItem('displayName');
+            const userRole = localStorage.getItem('userRole');
+            const currentTime = new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+
+            // Set level based on username
+            let level;
+            if (username === 'artheus') {
+                level = 43;
+            } else if (username === 'daynm126x') {
+                level = 14;
+            } else {
+                level = 1; // Default level for other users
+            }
+
+            addMessage(username, displayName, userRole, message, currentTime, level);
+            chatInput.value = '';
+            
+            const messagesContainer = document.getElementById('messages-container');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function addMessage(username, displayName, role, message, time, level) {
+            const messagesContainer = document.getElementById('messages-container');
+            const messageDiv = document.createElement('div');
+            
+            if (role === 'admin') {
+                messageDiv.className = 'Owner';
+                messageDiv.innerHTML = `
+                    <div class="Owner-Top">
+                        <span class="Time">${time}</span>
+                        <div class="Acc-N-L-3">
+                            <img src="Images/Crown-Gold.png">
+                            <div class="Gold-Text">Owner</div>
+                            <span class="Name"> ${displayName}</span>
+                        </div>
+                        <div class="Dots">
+                            <div class="Dot"></div>
+                            <div class="Dot"></div>
+                            <div class="Dot"></div>
+                        </div>
+                    </div>
+                    <div class="Owner-Bottom">
+                        <img class="Pic-2" src="Images/Dota2Icon.png">
+                        <div class="Message-Box-D-3">
+                            <span>${message}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                let userClass, topClass, bottomClass, nameClass, lvlClass, imgSrc, messageBoxClass;
+                
+                if (username === 'artheus' || displayName === 'Artheus') {
+                    userClass = 'Artheus';
+                    topClass = 'Artheus-Top';
+                    bottomClass = 'Artheus-Bottom';
+                    nameClass = 'Acc-N-L';
+                    lvlClass = 'LVL';
+                    imgSrc = 'Images/Dota2Art.png';
+                    messageBoxClass = 'Message-Box';
+                } else {
+                    userClass = 'Daynm126x';
+                    topClass = 'Daynm126x-Top';
+                    bottomClass = 'Daynm126x-Bottom';
+                    nameClass = 'Acc-N-L-2';
+                    lvlClass = 'LVL-Grey';
+                    imgSrc = 'Images/D.png';
+                    messageBoxClass = 'Message-Box-D';
+                }
+                
+                messageDiv.className = userClass;
+                messageDiv.innerHTML = `
+                    <div class="${topClass}">
+                        <span class="Time">${time}</span>
+                        <div class="${nameClass}">
+                            <span class="Name">${displayName}</span>
+                            <div class="${lvlClass}"><span>${level}</span></div>
+                        </div>
+                        <div class="Dots">
+                            <div class="Dot"></div>
+                            <div class="Dot"></div>
+                            <div class="Dot"></div>
+                        </div>
+                    </div>
+                    <div class="${bottomClass}">
+                        <img class="Pic" src="${imgSrc}">
+                        <div class="${messageBoxClass}">
+                            <span>${message}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>

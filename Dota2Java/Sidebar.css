@@ -1,0 +1,369 @@
+.Sidebar {
+    height: 100vh;
+    width: 335px;
+    background: linear-gradient(205.13deg, #151519 -61.81%, #09090C 175.31%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
+    backdrop-filter: blur(15px);
+    box-shadow: 1px 0px 6px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid red;
+    align-items: center;
+}
+
+.Chat-Header {
+    display: flex;
+    /* gap: 50px; */
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(217, 217, 217, 0.06);
+    width: 305px;
+}
+
+.Online-People {
+    font-family: Montserrat;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #FFFFFF;
+    display: flex;
+    gap: 10px;
+    padding-left: 15px;
+}
+
+.Status {
+    width: 12px;
+    height: 12px;
+    box-shadow: 0px 2px 15px 0px rgba(21, 228, 67, 1);
+    background: radial-gradient(41.67% 41.67% at 50% 50%, #309747 0%, rgba(48, 151, 71, 0) 100%);
+    border-radius: 6px;
+
+}
+
+.Chat-Rules {
+    font-family: Montserrat;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+}
+
+.Region {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.Messages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 10px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 750px;
+    padding-bottom: 40px;
+}
+
+.Artheus {
+    display: flex;
+    flex-direction: column;
+    width: 305px;
+    height: 86px;
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.Artheus-Top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Time {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+}
+
+.Acc-N-L {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 12px;
+    margin-left: -68px;
+}
+
+.Acc-N-L-2 {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 12px;
+    margin-left: -42px;
+}
+
+.Name {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 1);
+}
+
+.LVL {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    border: 1px solid;
+    border-image: linear-gradient(270deg, #FF0000 -97%, rgba(108, 27, 27, 0) 164%);
+    background: linear-gradient(91.47deg, #430303 -52.79%, rgba(0, 0, 0, 0) 100.55%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21));
+    backdrop-filter: blur(1.0023541450500488px);
+    border-image-slice: 1;
+    display: flex;
+    width: 35px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.LVL span {
+    background: linear-gradient(226.72deg, #430C07 -9.59%, #811D14 15.83%, #D23424 55.19%, #AF2A1B 101.62%);
+    color: transparent;
+    background-clip: text;
+}
+
+.Dots {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.Dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 3px;
+}
+
+.Artheus-Bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+}
+
+.Message-Box {
+    width: 243px;
+    height: 44px;
+    border-radius: 5px;
+    background-color: rgba(217, 217, 217, 0.04);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.Message-Box span {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+    padding-left: 12px;
+}
+
+.Daynm126x {
+    display: flex;
+    flex-direction: column;
+    width: 305px;
+    height: 132px;
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.Daynm126x-Top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.LVL-Grey {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    border: 1px solid;
+    background: linear-gradient(91.47deg, #505050 -52.79%, rgba(0, 0, 0, 0) 100.55%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21));
+    border-image-source: linear-gradient(270deg, #696969 -97%, rgba(37, 37, 37, 0) 164%);
+    backdrop-filter: blur(1.0023541450500488px);
+    border-image-slice: 1;
+    display: flex;
+    width: 35px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.LVL-Grey span {
+    background: linear-gradient(91.47deg, #9C9C9C -52.79%, #636363 100.55%);
+    color: transparent;
+    background-clip: text;
+}
+
+.Daynm126x-Bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+}
+
+.Message-Box-D {
+    width: 243px;
+    height: 98px;
+    border-radius: 5px;
+    background-color: rgba(217, 217, 217, 0.04);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.Message-Box-D span {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 110%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+    padding-left: 12px;
+}
+
+.Pic {
+    height: 52px;
+    width: 52px;
+}
+
+.Message-Box-D-2 {
+    width: 243px;
+    height: 80px;
+    border-radius: 5px;
+    background-color: rgba(217, 217, 217, 0.04);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.Message-Box-D-2 span {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 110%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+    padding-left: 12px;
+}
+
+.Owner {
+    display: flex;
+    flex-direction: column;
+    width: 305px;
+    height: 84px;
+    gap: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.Owner-Top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Acc-N-L-3 {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    gap: 8px;
+    margin-left: -42px;
+}
+
+.Owner-Bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    gap: 8px;
+}
+
+.Message-Box-D-3 {
+    width: 243px;
+    height: 44px;
+    border-radius: 5px;
+    background: linear-gradient(219.83deg, rgba(255, 181, 70, 0.12) -31.99%, rgba(255, 181, 70, 0.12) 30.24%, rgba(226, 151, 39, 0.12) 52.85%, rgba(210, 134, 21, 0.12) 73.18%, rgba(202, 126, 13, 0.12) 93.37%, rgba(245, 170, 59, 0.12) 113.37%, rgba(199, 123, 10, 0.12) 137.65%, rgba(208, 132, 19, 0.12) 154.66%, rgba(223, 148, 36, 0.12) 181.87%, rgba(255, 181, 70, 0.12) 207.27%);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 12px;
+}
+
+.Message-Box-D-3 span {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    background: linear-gradient(219.83deg, #FFB546 -31.99%, #FFB546 30.24%, #E29727 52.85%, #D28615 73.18%, #CA7E0D 93.37%, #F5AA3B 113.37%, #C77B0A 137.65%, #D08413 154.66%, #DF9424 181.87%, #FFB546 207.27%);
+    color: transparent;
+    background-clip: text;
+}
+
+.Pic-2 {
+    width: 52px;
+    height: 52px;
+    border: 1px solid;
+    border-image: radial-gradient(128.85% 128.85% at 50% 50%, #FF0000 0%, rgba(0, 0, 0, 0) 100%);
+    border-image-slice: 1;
+}
+
+.Text-Box {
+    width: 305px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(16, 16, 19, 1);
+    border: 1px solid rgba(23, 23, 28, 1);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.15) inset;
+    color: rgba(59, 59, 62, 1);
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+}
+
+.Text-Box span {
+    padding-left: 12px;
+}
+
+.Icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-right: 12px;
+}

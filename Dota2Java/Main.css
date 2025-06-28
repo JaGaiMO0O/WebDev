@@ -1,0 +1,622 @@
+.Screen {
+    background-color: rgba(14, 14, 19, 1);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    background-color: rgba(14, 14, 19, 1);
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+.Main-Body {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.Main-Screen {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(90deg, rgba(195, 30, 36, 0.35) 16.09%, rgba(155, 13, 19, 0.35) 120.94%);
+}
+
+.Background-Gold {
+    border: 0.77px solid;
+    border-image: linear-gradient(316.22deg, #F2B745 -7.17%, rgba(28, 28, 36, 0) 80.42%);
+    border-image-slice: 1;
+    background: linear-gradient(91.47deg, rgba(0, 0, 0, 0.67) -52.79%, rgba(0, 0, 0, 0) 100.55%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)),
+        linear-gradient(217.9deg, rgba(255, 187, 55, 0.05) 24.82%, rgba(204, 148, 39, 0.05) 46.76%, rgba(255, 195, 79, 0.05) 77.73%, rgba(214, 156, 44, 0.05) 87.63%),
+        radial-gradient(64.83% 229.23% at 50% -71.48%, rgba(215, 172, 21, 0.55) 0%, rgba(17, 18, 29, 0) 100%);
+    backdrop-filter: blur(1.5361729860305786px);
+
+
+}
+
+.Items4Sale {
+    background-image: url(Images/Background-Waves.png);
+    width: 132px;
+    height: 130px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.Items-Crown {
+    padding-top: 8px;
+    padding-left: 7px;
+}
+
+/* .BackWaves {
+    position: relative;
+} */
+
+.Row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.Row-Clean {
+    display: flex;
+
+}
+
+.Column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* gap: 16px; */
+    margin-top: -10px;
+}
+
+.Dota2Icon-2 {
+    height: 14px;
+    width: 14px;
+    border-radius: 7px;
+    /* position: absolute; */
+    box-shadow: 0px 1.54px 11.52px 0px rgba(255, 0, 0, 0.25);
+
+}
+
+.Balance-2 {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 11.52px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: white;
+}
+
+.Tiny-2 {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 9.99px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: -4px;
+    margin-bottom: -2px;
+}
+
+.Background-Art {
+    background-image: url(Images/Background-Art.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 78px;
+    width: 78px;
+    /* backdrop-filter: blur(77%) opacity(50%); */
+    margin-top: -8px;
+}
+
+.Golden-Staff {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 9.99px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    background: linear-gradient(217.9deg, #FFBB37 24.82%, #CC9427 46.76%, #FFC34F 77.73%, #D69C2C 87.63%);
+    color: transparent;
+    background-clip: text;
+    width: 88px;
+    height: 24px;
+}
+
+.Background-Grey {
+    background: linear-gradient(91.47deg, rgba(0, 0, 0, 0.67) -52.79%, rgba(0, 0, 0, 0) 100.55%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21));
+    border: 0.77px solid transparent;
+
+    border-image: linear-gradient(316.22deg, #1C1C24 -7.17%, rgba(28, 28, 36, 0) 80.42%);
+    border-image-slice: 1;
+    backdrop-filter: blur(1.5361729860305786px);
+
+}
+
+.Items4Sale-2 {
+    /* background-image: url(Images/Background-Waves.png); */
+    width: 132px;
+    height: 130px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.Green-Dot {
+    width: 8px;
+    height: 8px;
+    /* border-radius: 36.87px; */
+    /* background: radial-gradient(41.67% 41.67% at 50% 50%, #309747 0%, rgba(48, 151, 71, 0) 100%); */
+    padding-top: 11.5px;
+    padding-left: 7px;
+}
+
+.Grey-Mask {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 9.22px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    background: linear-gradient(180deg, #87665F 23.81%, #BB9F97 78.57%);
+    color: transparent;
+    background-clip: text;
+}
+
+.Advertisment {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-left: 142px;
+    padding-bottom: 35px;
+    gap: 35px;
+}
+
+.Advertisment-1 {
+    width: 775px;
+    height: 185px;
+    background: rgba(0, 0, 0, 0.39);
+    backdrop-filter: blur(15px);
+}
+
+.Advertisment-2 {
+    width: 512px;
+    height: 185px;
+    background: rgba(0, 0, 0, 0.39);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: end;
+    align-items: end;
+
+}
+
+.Advertisment-3 {
+    width: 424px;
+    height: 228px;
+    background: rgba(0, 0, 0, 0.39);
+    backdrop-filter: blur(15px);
+}
+
+.Advertisment-4 {
+    width: 424px;
+    height: 228px;
+    background: rgba(0, 0, 0, 0.39);
+    backdrop-filter: blur(15px);
+}
+
+.Advertisment-5 {
+    width: 424px;
+    height: 228px;
+    background: rgba(0, 0, 0, 0.39);
+    backdrop-filter: blur(15px);
+}
+
+.Row-Ad-1 {
+    display: flex;
+    gap: 15px;
+}
+
+.Row-Ad-2 {
+    display: flex;
+    gap: 15px;
+}
+
+.Dot-1 {
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
+    background-color: rgba(79, 79, 79, 1);
+}
+
+.Dot-2 {
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
+    background-color: rgba(34, 34, 34, 1);
+
+}
+
+.Dots-1 {
+    gap: 9px;
+    display: flex;
+    padding-bottom: 10px;
+    padding-right: 17px;
+}
+
+.Bets {
+    display: flex;
+    flex-direction: column;
+    padding-left: 142px;
+}
+
+.Bets-Header {
+    width: 1267px;
+    height: 65px;
+    background: rgba(0, 0, 0, 0.39);
+    backdrop-filter: blur(15px);
+    gap: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 35px;
+}
+
+.All-Bets {
+    font-family: Montserrat;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 1);
+    border-bottom: 2px solid rgba(195, 30, 36, 1);
+    padding-bottom: 24px;
+    margin-bottom: -25px;
+}
+
+.High-Rollers {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+
+}
+
+.Lucky-Wins {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+}
+
+.My-Bets {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+}
+
+.Current-Bets {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    padding-left: 35px;
+    padding-top: 12px;
+    align-items: center;
+    row-gap: 26px;
+}
+
+.Grey-Text {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+
+}
+
+.Username-Table {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+}
+
+.Bets-User {
+    width: 33px;
+    height: 33px;
+}
+
+.Username-Bet {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 1);
+
+}
+
+.Upgrader-Table {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+}
+
+.Red-Arrow {
+    height: 18px;
+    width: 18px;
+}
+
+.Upgrader-Text {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: white;
+}
+
+.Time-Table {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+
+}
+
+.Bet-Amount {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+}
+
+.Dota-Bet {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+}
+
+.White {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: white;
+}
+
+.Grey {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(102, 102, 104, 1);
+    margin-left: -8px;
+    margin-bottom: -2px;
+}
+
+.Multiplier-Green {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(65, 218, 40, 1);
+
+}
+
+.Multiplier-Grey {
+    color: rgba(102, 102, 104, 1);
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.Profit {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 8px;
+    margin-left: -56px;
+}
+
+.Profit-Green {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    background: linear-gradient(91.47deg, #505050 -52.79%, rgba(0, 0, 0, 0) 100.55%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)),
+        linear-gradient(0deg, rgba(65, 218, 40, 0.15), rgba(65, 218, 40, 0.15));
+    border: 0.91px solid;
+
+    border-image-source: linear-gradient(270deg, #41DA28 -97%, rgba(37, 37, 37, 0) 164%);
+
+    border-image-slice: 1;
+    height: 23px;
+    width: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: left;
+}
+
+.Profit-Green span {
+    background: rgba(65, 218, 40, 1);
+    color: transparent;
+    background-clip: text;
+}
+
+.Profit-Red {
+    font-family: Montserrat;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    background: linear-gradient(91.47deg, #505050 -52.79%, rgba(0, 0, 0, 0) 100.55%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.21), rgba(0, 0, 0, 0.21)),
+        linear-gradient(90deg, rgba(195, 30, 36, 0.15) 16.09%, rgba(155, 13, 19, 0.15) 120.94%);
+    border: 0.91px solid;
+
+    border-image: linear-gradient(270deg, #41DA28 -97%, #B81A20 -80.69%, rgba(37, 37, 37, 0) 164%);
+
+    border-image-slice: 1;
+    height: 23px;
+    width: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: left;
+}
+
+.Profit-Red span {
+    background: linear-gradient(90deg, #C31E24 16.09%, #9B0D13 120.94%);
+    color: transparent;
+    background-clip: text;
+
+}
+
+/* .Scroll-Screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+} */
+
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+.login-box {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    /* box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); */
+    min-width: 400px;
+}
+
+.login-logo {
+    margin-bottom: 30px;
+}
+
+.login-logo img {
+    width: 150px;
+    height: auto;
+}
+
+.login-title {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.form-group label {
+    color: #ffffff;
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+/* .form-group input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #555;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Rubik', sans-serif;
+            font-size: 16px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        } */
+
+/* .form-group input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            outline: none;
+        } */
+
+/* .login-button {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            border: none;
+            border-radius: 8px;
+            color: #000000;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 20px;
+            padding: 15px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        } */
+
+/* .login-button:hover {
+            background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        } */
+
+/* .error-message {
+            color: #ff4444;
+            font-family: 'Rubik', sans-serif;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .success-message {
+            color: #44ff44;
+            font-family: 'Rubik', sans-serif;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none;
+        } */
