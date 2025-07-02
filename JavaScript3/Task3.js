@@ -1,11 +1,6 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
-
-
-
-
-
 let shapes = [];
 let current_shape_index = null;
 let is_dragging = false;
@@ -36,8 +31,34 @@ let is_mouse_in_shape = function (x, y, shape) {
     const localY = dx * sin + dy * cos;
 
     return (
-        localX >= -50 && localX <= shape.width -50 && localY >= -50 && localY <= shape.height -50
+        localX >= -50 && localX <= shape.width - 50 && localY >= -50 && localY <= shape.height - 50
     );
+}
+
+function checkCollision(shapeToCheck) {
+    for (const shape of shapes) {
+        if (shape === shapeToCheck) continue;
+
+        const a = getRotatedBounds(shapeToCheck);
+        const b = getRotatedBounds(shape);
+
+        if (a.x1 < b.x2 && a.x2 > b.x1 && a.y1 < b.y2 && a.y2 > b.y1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function getRotatedBounds(shape) {
+    const rotatedWidth = shape.rotation % 180 === 0 ? shape.width : shape.height;
+    const rotatedHeight = shape.rotation % 180 === 0 ? shape.height : shape.width;
+
+    return {
+        x1: shape.x,
+        y1: shape.y,
+        x2: shape.x + rotatedWidth,
+        y2: shape.y + rotatedHeight
+    };
 }
 
 let mouse_down = function (event) {
@@ -53,15 +74,14 @@ let mouse_down = function (event) {
         if (is_mouse_in_shape(startX, startY, shape)) {
             current_shape_index = index;
             is_dragging = true;
-            shape.selected = true; 
-            draw_shapes(); 
+            shape.selected = true;
+            draw_shapes();
             return;
         }
 
         index++;
-
     }
-    
+
     current_shape_index = null;
     draw_shapes();
 }
@@ -69,19 +89,30 @@ let mouse_down = function (event) {
 
 let mouse_up = function (event) {
     if (!is_dragging) return;
-    
+
     event.preventDefault();
     is_dragging = false;
 
     if (current_shape_index !== null) {
         const shape = shapes[current_shape_index];
 
+        const snappedX = Math.round(shape.x / 100) * 100;
+        const snappedY = Math.round(shape.y / 100) * 100;
 
-        shape.x = Math.round(shape.x / 100) * 100;
-        shape.x = Math.max(0, Math.min(shape.x, 700 - shape.width));
+        const oldX = shape.x;
+        const oldY = shape.y;
 
-        shape.y = Math.round(shape.y / 100) * 100;
-        shape.y = Math.max(0, Math.min(shape.y, 700 - shape.height));
+        shape.x = snappedX;
+        shape.y = snappedY;
+
+        if (!checkCollision(shape)) {
+            shape.x = snappedX;
+            shape.y = snappedY;
+        } else {
+            shape.x = oldX;
+            shape.y = oldY;
+        }
+
         draw_shapes();
     }
 };
@@ -97,25 +128,35 @@ let mouse_out = function (event) {
 }
 
 let mouse_move = function (event) {
-    if (!is_dragging) {
-        return
-    } else {
-        event.preventDefault();
-        let mouseX = parseInt(event.clientX);
-        let mouseY = parseInt(event.clientY);
+    if (!is_dragging || current_shape_index === null) return
 
-        let dx = mouseX - startX;
-        let dy = mouseY - startY;
+    event.preventDefault();
+    let mouseX = parseInt(event.clientX);
+    let mouseY = parseInt(event.clientY);
 
-        let current_shape = shapes[current_shape_index];
-        current_shape.x += dx;
-        current_shape.y += dy;
+    let dx = mouseX - startX;
+    let dy = mouseY - startY;
 
-        draw_shapes();
+    let shape = shapes[current_shape_index];
+    shape.x += dx;
+    shape.y += dy;
 
-        startX = mouseX;
-        startY = mouseY;
+    const rotatedWidth = shape.rotation % 180 === 0 ? shape.width : shape.height;
+    const rotatedHeight = shape.rotation % 180 === 0 ? shape.height : shape.width;
+
+    shape.x = Math.max(0, Math.min(shape.x, grid_max_x - rotatedWidth));
+    shape.y = Math.max(0, Math.min(shape.y, grid_max_y - rotatedHeight));
+
+    if (checkCollision(shape)) {
+        shape.x = oldX;
+        shape.y = oldY;
     }
+
+    draw_shapes();
+
+    startX = mouseX;
+    startY = mouseY;
+
 }
 
 canvas.onmousedown = mouse_down;
@@ -123,12 +164,11 @@ canvas.onmouseup = mouse_up;
 canvas.onmouseout = mouse_out;
 canvas.onmousemove = mouse_move;
 
-
 let draw_shapes = function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let shape of shapes) {
         ctx.save();
-        
+
         const pivotX = shape.x + 50;
         const pivotY = shape.y + 50;
 
@@ -145,10 +185,9 @@ let draw_shapes = function () {
         }
 
         ctx.restore();
-
     }
 
-//Grid
+    //Grid
 
     const gridSize = 100;
     const gridCols = 7;
@@ -185,27 +224,34 @@ rotateButton.addEventListener('click', () => {
 
     if (!selectedShape) return;
 
-    const newRotation = (selectedShape.rotation + 45) % 360;
-    const rotatedWidth = newRotation % 180 === 0 ? selectedShape.width : selectedShape.height;
-    const rotatedHeight = newRotation % 180 === 0 ? selectedShape.height : selectedShape.width;
+    const oldRotation = selectedShape.rotation;
+    const oldX = selectedShape.x;
+    const oldY = selectedShape.y;
 
-    const pivotX = selectedShape.x + 50;
-    const pivotY = selectedShape.y + 50;
+    selectedShape.rotation = (oldRotation + 45) % 360;
 
-    let newX = pivotX - 50;
-    let newY = pivotY - 50;
-    if (newRotation === 90 || newRotation === 270) {
-        newX = pivotX - selectedShape.height / 4;
-        newY = pivotY - selectedShape.width / 4;
+    const rotatedWidth = selectedShape.rotation % 180 === 0 ? selectedShape.width : selectedShape.height;
+    const rotatedHeight = selectedShape.rotation % 180 === 0 ? selectedShape.height : selectedShape.width;
+
+    const centerX = oldX - (rotatedWidth / 2);
+    const centerY = oldY - (rotatedHeight / 2);
+
+    if (
+        selectedShape.x >= 0 &&
+        selectedShape.y >= 0 &&
+        selectedShape.x + rotatedWidth <= grid_max_x &&
+        selectedShape.y + rotatedHeight <= grid_max_y &&
+        !checkCollision(selectedShape)
+    ) {
+        selectedShape.x = Math.round(selectedShape.x / 100) * 100;
+        selectedShape.y = Math.round(selectedShape.y / 100) * 100;
+    } else {
+        selectedShape.rotation = oldRotation;
+        selectedShape.x = oldX;
+        selectedShape.y = oldY;
     }
 
-    if(newX >= grid_min_x && newX + rotatedWidth <= grid_max_x && newY >= grid_min_y && newY + rotatedHeight <= grid_max_y){
-        selectedShape.rotation = newRotation;
-        selectedShape.x = Math.round(newX / 100) * 100;
-        selectedShape.y = Math.round(newY / 100) * 100;
-        draw_shapes();
-    };
-
+    draw_shapes();
 });
 
 const resetButton = document.getElementById('resetGame');
