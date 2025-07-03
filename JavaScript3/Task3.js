@@ -10,6 +10,7 @@ const grid_min_x = 0;
 const grid_max_x = 700;
 const grid_min_y = 0;
 const grid_max_y = 700;
+
 shapes.push({ x: 800, y: 50, width: 100, height: 100, color: 'blue', rotation: 0, selected: false });
 shapes.push({ x: 800, y: 175, width: 100, height: 200, color: 'orange', rotation: 0, selected: false });
 shapes.push({ x: 800, y: 400, width: 100, height: 300, color: 'purple', rotation: 0, selected: false });
