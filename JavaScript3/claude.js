@@ -301,7 +301,7 @@ let draw_shapes = function () {
 
         if (shape.selected) {
             ctx.strokeStyle = 'black';
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 1;
             ctx.strokeRect(0, 0, shape.width, shape.height);
         }
 
@@ -337,11 +337,11 @@ rotateButton.addEventListener('click', () => {
         selectedShape.y = Math.round(selectedShape.y / GRID_SIZE) * GRID_SIZE;
 
         // Double-check after snapping
-        if (!isWithinBounds(selectedShape) || checkCollision(selectedShape)) {
-            selectedShape.rotation = oldRotation;
-            selectedShape.x = oldX;
-            selectedShape.y = oldY;
-        }
+        // if (!isWithinBounds(selectedShape) || checkCollision(selectedShape)) {
+        //     selectedShape.rotation = oldRotation;
+        //     selectedShape.x = oldX;
+        //     selectedShape.y = oldY;
+        // }
     }
 
     draw_shapes();
