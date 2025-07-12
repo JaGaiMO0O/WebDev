@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Custom Value Line Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      max-width: 800px;
+      margin: 50px auto;
+      display: block;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background);
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="myChart" width="800" height="400"></canvas>
+
+  <script>
+    const labels = ['Jul 1', 'Jul 2', 'Jul 3', 'Jul 4'];
+    const dataValues = [1000, 1100, 8500, 7000]; // Your actual Y values
+
+    const icon = new Image(32, 32);
+    icon.src = 'https://cdn-icons-png.flaticon.com/512/709/709496.png'; // Use your own icon if needed
+
+    icon.onload = () => {
+      const ctx = document.getElementById('myChart').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Value',
+            data: dataValues,
+            pointStyle: Array(dataValues.length).fill(icon),
+            pointRadius: 16,
+            pointHoverRadius: 18,
+            tension: 0.3,
+            segment: {
+              borderColor: ctx => {
+                const i = ctx.p0DataIndex;
+                const val = dataValues;
+                return val[i + 1] > val[i] ? 'green' : 'red';
+              },
+              borderWidth: 3
+            }
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: items => `Date: ${items[0].label}`,
+                label: item => `Value: ${item.raw}`
+              }
+            },
+            legend: { display: false }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Date'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Amount'
+              },
+              ticks: {
+                stepSize: 1000,
+                callback: val => val,
+                suggestedMin: 1000,
+                suggestedMax: 9000
+              }
+            }
+          }
+        }
+      });
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="1200" height="800" style="border: 1px solid black;"></canvas>
+    <script>
+        const xAxis = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        const yAxis = [1.00, 10.00, 50.00, 100.00, 200.00, 500.00, 1000.00, 5000.00];
+        const values = [50, 120, 430, 980, 1240, 2300, 1530, 1330, 4320, 3590, 4730];
+        
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xAxis,
+                datasets: [{
+                    label: 'Value',
+                    data: values,
+                    borderColor: "red",
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        grid: {
+                            display: true
+                        }
+                    },
+                    y: {
+                        type: 'logarithmic',
+                        min: 1,
+                        max: 5000,
+                        ticks: {
+                            callback: function (value, index, ticks) {
+                                // Only show ticks for values that are in your yAxis array
+                                if (yAxis.includes(value)) {
+                                    return '$' + value;
+                                }
+                                return '';
+                            },
+                            // Generate ticks only for your specified values
+                            stepSize: null,
+                            autoSkip: false
+                        },
+                        grid: {
+                            display: true,
+                            drawOnChartArea: true,
+                            lineWidth: function (context) {
+                                // Only show grid lines for your yAxis values
+                                const value = context.tick.value;
+                                return yAxis.includes(value) ? 1 : 0;
+                            }
+                        },
+                        afterBuildTicks: function(scale) {
+                            // Override the ticks to only show your specified values
+                            scale.ticks = yAxis.map(value => ({ value: value }));
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
