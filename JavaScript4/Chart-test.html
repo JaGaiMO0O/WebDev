@@ -84,14 +84,67 @@
                    '2024-07-15', '2024-08-15', '2024-09-15', '2024-10-15', '2024-11-15', '2024-12-15']
         };
 
+        const pointImages = {
+            increase: null,
+            decrease: null,
+            neutral: null
+        };
+
+        // Function to create custom point images
+        function createCustomPointImage(color, size = 20) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Create a circular gradient
+            const gradient = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+            gradient.addColorStop(0, color);
+            gradient.addColorStop(0.7, color);
+            gradient.addColorStop(1, 'transparent');
+            
+            // Draw outer glow
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Draw inner circle
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/3, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.fill();
+            
+            // Add inner highlight
+            ctx.beginPath();
+            ctx.arc(size/2 - 2, size/2 - 2, size/6, 0, 2 * Math.PI);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.fill();
+            
+            return canvas;
+        }
+
+        // Alternative: Function to load external images
+        function loadCustomImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = src;
+            });
+        }
+
+        // Initialize custom point images
+        pointImages.increase = createCustomPointImage('#00ff88', 24);
+        pointImages.decrease = createCustomPointImage('#ff4444', 24);
+        pointImages.neutral = createCustomPointImage('#666666', 24);
+
         // Calculate segments with colors
         function getSegmentColors(values) {
             const colors = [];
             for (let i = 1; i < values.length; i++) {
                 if (values[i] > values[i-1]) {
-                    colors.push('#00ff88');
+                    colors.push('#00ff88'); // Green for increase
                 } else {
-                    colors.push('#ff4444');
+                    colors.push('#ff4444'); // Red for decrease
                 }
             }
             return colors;
@@ -129,10 +182,10 @@
                     label: 'Portfolio Value',
                     data: chartData.values,
                     borderWidth: 4,
-                    pointRadius: 8,
-                    pointHoverRadius: 12,
-                    pointBorderWidth: 3,
-                    pointHoverBorderWidth: 4,
+                    pointRadius: 12, // Increased for custom images
+                    pointHoverRadius: 16,
+                    pointBorderWidth: 0, // Remove border for custom images
+                    pointHoverBorderWidth: 0,
                     fill: false,
                     tension: 0.4,
                     segment: {
@@ -142,20 +195,23 @@
                             return current > previous ? '#00ff88' : '#ff4444';
                         }
                     },
-                    pointBackgroundColor: function(ctx) {
+                    pointStyle: function(ctx) {
                         const index = ctx.dataIndex;
-                        if (index === 0) return '#00ff88';
+                        if (index === 0) return pointImages.neutral;
+                        
                         const current = chartData.values[index];
                         const previous = chartData.values[index - 1];
-                        return current > previous ? '#00ff88' : '#ff4444';
+                        
+                        if (current > previous) {
+                            return pointImages.increase;
+                        } else if (current < previous) {
+                            return pointImages.decrease;
+                        } else {
+                            return pointImages.neutral;
+                        }
                     },
-                    pointBorderColor: function(ctx) {
-                        const index = ctx.dataIndex;
-                        if (index === 0) return '#00ff88';
-                        const current = chartData.values[index];
-                        const previous = chartData.values[index - 1];
-                        return current > previous ? '#00ff88' : '#ff4444';
-                    }
+                    pointBackgroundColor: 'transparent', // Make background transparent for custom images
+                    pointBorderColor: 'transparent'
                 }]
             },
             options: {
@@ -246,6 +302,72 @@
                 }
             }
         });
+
+        // Example: Loading external images (uncomment and modify as needed)
+        /*
+        async function initializeWithExternalImages() {
+            try {
+                pointImages.increase = await loadCustomImage('path/to/your/increase-icon.png');
+                pointImages.decrease = await loadCustomImage('path/to/your/decrease-icon.png');
+                pointImages.neutral = await loadCustomImage('path/to/your/neutral-icon.png');
+                
+                // Update the chart after images are loaded
+                myChart.update();
+            } catch (error) {
+                console.error('Failed to load custom images:', error);
+            }
+        }
+        
+        // Call this function if you want to use external images
+        // initializeWithExternalImages();
+        */
+
+        // Example: Creating different custom shapes
+        function createArrowUpImage(color, size = 24) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(size/2, 4);
+            ctx.lineTo(size - 4, size - 4);
+            ctx.lineTo(size/2 + 4, size - 4);
+            ctx.lineTo(size/2 + 4, size/2);
+            ctx.lineTo(size/2 - 4, size/2);
+            ctx.lineTo(size/2 - 4, size - 4);
+            ctx.lineTo(4, size - 4);
+            ctx.closePath();
+            ctx.fill();
+            
+            return canvas;
+        }
+
+        function createArrowDownImage(color, size = 24) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(size/2, size - 4);
+            ctx.lineTo(4, 4);
+            ctx.lineTo(size/2 - 4, 4);
+            ctx.lineTo(size/2 - 4, size/2);
+            ctx.lineTo(size/2 + 4, size/2);
+            ctx.lineTo(size/2 + 4, 4);
+            ctx.lineTo(size - 4, 4);
+            ctx.closePath();
+            ctx.fill();
+            
+            return canvas;
+        }
+
+        // Uncomment these lines to use arrow shapes instead of circles
+        // pointImages.increase = createArrowUpImage('#00ff88', 24);
+        // pointImages.decrease = createArrowDownImage('#ff4444', 24);
 
         function getOrCreateTooltip(chart) {
             let tooltipEl = chart.canvas.parentNode.querySelector('.chartjs-tooltip');
