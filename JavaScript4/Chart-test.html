@@ -4,37 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Chart Replica - Fixed Tooltips</title>
+  <title>Timeline Portfolio Chart</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <style>
     body {
       margin: 0;
       padding: 20px;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      background: linear-gradient(135deg, #4b0000, #3e1616);
       font-family: 'Arial', sans-serif;
       color: white;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       background: rgba(0, 0, 0, 0.3);
       border-radius: 15px;
       padding: 30px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      position: relative; /* Added for proper tooltip positioning */
+      position: relative;
     }
 
     .chart-container {
       position: relative;
-      height: 500px;
+      height: 600px;
       margin-top: 20px;
     }
 
     h1 {
       text-align: center;
       margin-bottom: 30px;
-      background: linear-gradient(45deg, #00ff88, #00ccff);
+      background: linear-gradient(45deg, #ff0000, #3e1616);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -42,7 +42,7 @@
     }
 
     .tooltip-box {
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(81, 0, 0, 0.95);
       border: 2px solid #333;
       border-radius: 8px;
       padding: 15px;
@@ -63,7 +63,7 @@
     .tooltip-value {
       font-size: 18px;
       font-weight: bold;
-      color: #00ff88;
+      color: #ffffff;
     }
 
     .tooltip-change {
@@ -79,7 +79,10 @@
       color: #ff4444;
     }
 
-    /* Improved tooltip positioning */
+    .neutral {
+      color: #666666;
+    }
+
     .chartjs-tooltip {
       position: absolute;
       pointer-events: none;
@@ -91,224 +94,85 @@
 
 <body>
   <div class="container">
-    <h1>Portfolio Performance Chart</h1>
+    <h1>Timeline Portfolio Performance</h1>
     <div class="chart-container">
       <canvas id="myChart"></canvas>
     </div>
   </div>
 
   <script>
-    // Sample data - replace with your actual data
     const chartData = {
-      labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-      values: [2000, 1500, 8000, 3500, 6000, 4500, 9500, 7000, 8500, 6500, 10000, 12000],
-      dates: ['2024-01-15', '2024-02-15', '2024-03-15', '2024-04-15', '2024-05-15', '2024-06-15',
-        '2024-07-15', '2024-08-15', '2024-09-15', '2024-10-15', '2024-11-15', '2024-12-15']
+      points: [
+        { date: '2024-01-15', value: 5000, type: 'C' },
+        { date: '2024-01-28', value: 3000, type: 'C' },
+        { date: '2024-02-12', value: 8000, type: 'C' },
+        { date: '2024-02-25', value: 6000, type: 'J' },
+        { date: '2024-03-08', value: 12000, type: 'C' },
+        { date: '2024-03-22', value: 4000, type: 'J' },
+        { date: '2024-04-05', value: 9000, type: 'C' },
+        { date: '2024-04-18', value: 7000, type: 'J' },
+        { date: '2024-05-01', value: 15000, type: 'J' },
+        { date: '2024-05-15', value: 11000, type: 'J' },
+        { date: '2024-06-02', value: 18000, type: 'C' },
+        { date: '2024-06-20', value: 14000, type: 'J' },
+        { date: '2024-07-10', value: 22000, type: 'C' },
+        { date: '2024-07-25', value: 19000, type: 'C' },
+        { date: '2024-08-12', value: 25000, type: 'C' },
+        { date: '2024-08-28', value: 21000, type: 'J' },
+        { date: '2024-09-15', value: 28000, type: 'C' },
+        { date: '2024-10-02', value: 24000, type: 'J' },
+        { date: '2024-10-20', value: 32000, type: 'C' },
+        { date: '2024-11-05', value: 29000, type: 'J' },
+        { date: '2024-11-22', value: 35000, type: 'C' },
+        { date: '2024-12-10', value: 38000, type: 'J' }
+      ]
     };
 
-    // Custom point images
-    const pointImages = {
-      increase: null,
-      decrease: null,
-      neutral: null
-    };
-
-    // Function to create custom point images
-    function createCustomPointImage(color, size = 20) {
+    // Function to create custom point images with letters
+    function createCustomPointImage(color, letter, size = 24) {
       const canvas = document.createElement('canvas');
       canvas.width = size;
       canvas.height = size;
       const ctx = canvas.getContext('2d');
 
-      // Create a circular gradient
+      // Draw outer glow
       const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
       gradient.addColorStop(0, color);
       gradient.addColorStop(0.7, color);
-      gradient.addColorStop(1, 'transparent');
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0.2)');
 
-      // Draw outer glow
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, size, size);
 
-      // Draw inner circle
+      // Draw main circle
       ctx.beginPath();
-      ctx.arc(size / 2, size / 2, size / 3, 0, 2 * Math.PI);
+      ctx.arc(size / 2, size / 2, size / 2 - 2, 0, 2 * Math.PI);
       ctx.fillStyle = color;
       ctx.fill();
 
-      // Add inner highlight
-      ctx.beginPath();
-      ctx.arc(size / 2 - 2, size / 2 - 2, size / 6, 0, 2 * Math.PI);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.fill();
+      // Draw letter
+      ctx.fillStyle = 'black';
+      ctx.font = `bold ${size * 0.6}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(letter, size / 2, size / 2);
 
       return canvas;
     }
 
-    // Initialize custom point images
-    pointImages.increase = createCustomPointImage('#00ff88', 16);
-    pointImages.decrease = createCustomPointImage('#ff4444', 16);
-    pointImages.neutral = createCustomPointImage('#666666', 16);
+    // Create point images
+    const pointImages = {
+      C_increase: createCustomPointImage('#00ff88', 'C'),
+      C_decrease: createCustomPointImage('#ff4444', 'C'),
+      C_neutral: createCustomPointImage('#666666', 'C'),
+      J_increase: createCustomPointImage('#00ff88', 'J'),
+      J_decrease: createCustomPointImage('#ff4444', 'J'),
+      J_neutral: createCustomPointImage('#666666', 'J')
+    };
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: chartData.labels,
-        datasets: [{
-          label: 'Portfolio Value',
-          data: chartData.values,
-          borderWidth: 4,
-          pointRadius: 8,
-          pointHoverRadius: 10,
-          pointBorderWidth: 0,
-          pointHoverBorderWidth: 0,
-          fill: false,
-          tension: 0.4,
-          segment: {
-            borderColor: function (ctx) {
-              const current = ctx.p1.parsed.y;
-              const previous = ctx.p0.parsed.y;
-              return current > previous ? '#00ff88' : '#ff4444';
-            }
-          },
-          pointStyle: function (ctx) {
-            const index = ctx.dataIndex;
-            if (index === 0) return pointImages.neutral;
-
-            const current = chartData.values[index];
-            const previous = chartData.values[index - 1];
-
-            if (current > previous) {
-              return pointImages.increase;
-            } else if (current < previous) {
-              return pointImages.decrease;
-            } else {
-              return pointImages.neutral;
-            }
-          },
-          pointBackgroundColor: 'transparent',
-          pointBorderColor: 'transparent'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            enabled: false,
-            external: function (context) {
-              const tooltipEl = getOrCreateTooltip(context.chart);
-              const tooltipModel = context.tooltip;
-
-              if (tooltipModel.opacity === 0) {
-                tooltipEl.style.opacity = 0;
-                return;
-              }
-
-              // Set content
-              if (tooltipModel.body) {
-                const dataIndex = tooltipModel.dataPoints[0].dataIndex;
-                const value = chartData.values[dataIndex];
-                const date = chartData.dates[dataIndex];
-                const prevValue = dataIndex > 0 ? chartData.values[dataIndex - 1] : value;
-                const change = value - prevValue;
-                const changePercent = dataIndex > 0 ? ((change / prevValue) * 100).toFixed(2) : 0;
-
-                tooltipEl.innerHTML = `
-                  <div class="tooltip-box">
-                    <div class="tooltip-header">${date}</div>
-                    <div class="tooltip-header">CoinFlip</div>
-                    <div class="tooltip-value">${value.toLocaleString()}</div>
-                    <div class="tooltip-change ${change >= 0 ? 'positive' : 'negative'}">
-                      ${change >= 0 ? '▲' : '▼'} ${Math.abs(change).toLocaleString()} (${Math.abs(changePercent)}%)
-                    </div>
-                    <div style="margin-top: 10px; font-size: 12px; color: #666;">Total ${change >= 0 ? 'gain' : 'lost'}</div>
-                    <button style="background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin-top: 8px; width: 100%; cursor: pointer;">VIEW</button>
-                  </div>
-                `;
-              }
-
-              // FIXED POSITIONING LOGIC
-              const chartContainer = context.chart.canvas.parentNode;
-              const containerRect = chartContainer.getBoundingClientRect();
-              const chartArea = context.chart.chartArea;
-              
-              // Calculate position within the chart container
-              const tooltipWidth = 220; // Approximate tooltip width
-              const tooltipHeight = 140; // Approximate tooltip height
-              
-              // Position relative to chart area, not canvas
-              let positionX = tooltipModel.caretX;
-              let positionY = tooltipModel.caretY;
-              
-              // Boundary checking within chart container
-              if (positionX + tooltipWidth > chartArea.right) {
-                positionX = tooltipModel.caretX - tooltipWidth - 20;
-              } else {
-                positionX = tooltipModel.caretX + 20;
-              }
-              
-              if (positionY - tooltipHeight < chartArea.top) {
-                positionY = tooltipModel.caretY + 20;
-              } else {
-                positionY = tooltipModel.caretY - tooltipHeight - 20;
-              }
-              
-              // Ensure tooltip stays within chart bounds
-              positionX = Math.max(chartArea.left, Math.min(positionX, chartArea.right - tooltipWidth));
-              positionY = Math.max(chartArea.top, Math.min(positionY, chartArea.bottom - tooltipHeight));
-
-              // Apply positioning
-              tooltipEl.style.opacity = 1;
-              tooltipEl.style.position = 'absolute';
-              tooltipEl.style.left = positionX + 'px';
-              tooltipEl.style.top = positionY + 'px';
-              tooltipEl.style.pointerEvents = 'none';
-              tooltipEl.style.zIndex = '1000';
-            }
-          }
-        },
-        scales: {
-          x: {
-            grid: {
-              display: false
-            },
-            ticks: {
-              color: '#888',
-              font: {
-                size: 12
-              }
-            }
-          },
-          y: {
-            grid: {
-              color: 'rgba(255, 255, 255, 0.1)'
-            },
-            ticks: {
-              color: '#888',
-              font: {
-                size: 12
-              },
-              callback: function (value, index, values) {
-                return '$' + value.toLocaleString();
-              }
-            }
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index'
-        }
-      }
-    });
+    let myChart;
 
     function getOrCreateTooltip(chart) {
-      // Create tooltip within the chart container, not canvas parent
       const chartContainer = chart.canvas.parentNode;
       let tooltipEl = chartContainer.querySelector('.chartjs-tooltip');
 
@@ -321,18 +185,185 @@
       return tooltipEl;
     }
 
+    function initChart() {
+      const ctx = document.getElementById('myChart').getContext('2d');
+
+      // Sort points by date
+      chartData.points.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      // Convert to chart format with timestamp positioning
+      const data = chartData.points.map(point => ({
+        x: new Date(point.date).getTime(),
+        y: point.value,
+        type: point.type,
+        date: point.date
+      }));
+
+      myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: [{
+            label: 'Portfolio Value',
+            data: data,
+            borderWidth: 4,
+            pointRadius: 12,
+            pointHoverRadius: 14,
+            pointBorderWidth: 0,
+            pointHoverBorderWidth: 0,
+            fill: false,
+            tension: 0.4,
+            segment: {
+              borderColor: function (ctx) {
+                const current = ctx.p1.parsed.y;
+                const previous = ctx.p0.parsed.y;
+                return current > previous ? '#00ff88' : '#ff4444';
+              }
+            },
+            pointStyle: function (ctx) {
+              const index = ctx.dataIndex;
+              const point = data[index];
+
+              if (index === 0) return pointImages[point.type + '_neutral'];
+
+              const current = point.y;
+              const previous = data[index - 1].y;
+              const trend = current > previous ? 'increase' : current < previous ? 'decrease' : 'neutral';
+
+              return pointImages[point.type + '_' + trend];
+            },
+            pointBackgroundColor: 'transparent',
+            pointBorderColor: 'transparent'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              enabled: false,
+              external: function (context) {
+                const tooltipEl = getOrCreateTooltip(context.chart);
+                const tooltipModel = context.tooltip;
+
+                if (tooltipModel.opacity === 0) {
+                  tooltipEl.style.opacity = 0;
+                  return;
+                }
+
+                if (tooltipModel.body) {
+                  const dataIndex = tooltipModel.dataPoints[0].dataIndex;
+                  const point = data[dataIndex];
+                  const prevPoint = dataIndex > 0 ? data[dataIndex - 1] : null;
+                  const change = prevPoint ? point.y - prevPoint.y : 0;
+                  const changePercent = prevPoint ? ((change / prevPoint.y) * 100).toFixed(2) : 0;
+                  const typeFullName = point.type === 'C' ? 'Coinflip' : 'Jackpot';
+
+                  tooltipEl.innerHTML = `
+                    <div class="tooltip-box">
+                      <div class="tooltip-header">${new Date(point.date).toLocaleDateString()}</div>
+                      <div class="tooltip-header">${typeFullName}</div>
+                      <div class="tooltip-value">${point.y.toLocaleString()}</div>
+                      ${prevPoint ? `
+                        <div class="tooltip-change ${change >= 0 ? 'positive' : 'negative'}">
+                          ${change >= 0 ? '▲' : '▼'} ${Math.abs(change).toLocaleString()} (${Math.abs(changePercent)}%)
+                        </div>
+                        <div style="margin-top: 10px; font-size: 12px; color: #666;">Total ${change >= 0 ? 'gain' : 'loss'}</div>
+                      ` : ''}
+                      <button style="background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin-top: 8px; width: 100%; cursor: pointer;">VIEW</button>
+                    </div>
+                  `;
+                }
+
+                // Position tooltip
+                const chartContainer = context.chart.canvas.parentNode;
+                const chartArea = context.chart.chartArea;
+                const tooltipWidth = 220;
+                const tooltipHeight = 160;
+
+                let positionX = tooltipModel.caretX;
+                let positionY = tooltipModel.caretY;
+
+                if (positionX + tooltipWidth > chartArea.right) {
+                  positionX = tooltipModel.caretX - tooltipWidth - 20;
+                } else {
+                  positionX = tooltipModel.caretX + 20;
+                }
+
+                if (positionY - tooltipHeight < chartArea.top) {
+                  positionY = tooltipModel.caretY + 20;
+                } else {
+                  positionY = tooltipModel.caretY - tooltipHeight - 20;
+                }
+
+                positionX = Math.max(chartArea.left, Math.min(positionX, chartArea.right - tooltipWidth));
+                positionY = Math.max(chartArea.top, Math.min(positionY, chartArea.bottom - tooltipHeight));
+
+                tooltipEl.style.opacity = 1;
+                tooltipEl.style.position = 'absolute';
+                tooltipEl.style.left = positionX + 'px';
+                tooltipEl.style.top = positionY + 'px';
+                tooltipEl.style.pointerEvents = 'none';
+                tooltipEl.style.zIndex = '1000';
+              }
+            }
+          },
+          scales: {
+            x: {
+              type: 'linear',
+              position: 'bottom',
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: '#888',
+                font: {
+                  size: 12
+                },
+                callback: function (value, index, values) {
+                  // Convert timestamp back to readable date
+                  const date = new Date(value);
+                  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                  return months[date.getMonth()];
+                },
+                maxTicksLimit: 12
+              }
+            },
+            y: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#888',
+                font: {
+                  size: 12
+                },
+                callback: function (value) {
+                  return value.toLocaleString();
+                }
+              }
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index'
+          }
+        }
+      });
+    }
+
+    // Initialize chart on page load
+    initChart();
+
     // Add hover effects
-    ctx.canvas.addEventListener('mousemove', function (e) {
-      ctx.canvas.style.filter = 'drop-shadow(0 0 20px rgba(0, 255, 136, 0.3))';
+    document.getElementById('myChart').addEventListener('mousemove', function (e) {
+      this.style.filter = 'drop-shadow(0 0 20px rgba(0, 255, 136, 0.3))';
     });
 
-    ctx.canvas.addEventListener('mouseleave', function () {
-      ctx.canvas.style.filter = 'none';
-    });
-
-    // Handle window resize to update tooltip positioning
-    window.addEventListener('resize', function() {
-      myChart.resize();
+    document.getElementById('myChart').addEventListener('mouseleave', function () {
+      this.style.filter = 'none';
     });
   </script>
 </body>
