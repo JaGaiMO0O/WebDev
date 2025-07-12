@@ -31,16 +31,6 @@
       margin-top: 20px;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      background: linear-gradient(45deg, #ff0000, #3e1616);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: 2.5em;
-    }
-
     .tooltip-box {
       background: rgba(81, 0, 0, 0.95);
       border: 2px solid #333;
@@ -94,7 +84,6 @@
 
 <body>
   <div class="container">
-    <h1>Timeline Portfolio Performance</h1>
     <div class="chart-container">
       <canvas id="myChart"></canvas>
     </div>
@@ -110,7 +99,7 @@
         { date: '2024-03-08', value: 12000, type: 'C' },
         { date: '2024-03-22', value: 4000, type: 'J' },
         { date: '2024-04-05', value: 9000, type: 'C' },
-        { date: '2024-04-18', value: 7000, type: 'J' },
+        { date: '2024-04-18', value: 10000, type: 'J' },
         { date: '2024-05-01', value: 15000, type: 'J' },
         { date: '2024-05-15', value: 11000, type: 'J' },
         { date: '2024-06-02', value: 18000, type: 'C' },
@@ -128,14 +117,12 @@
       ]
     };
 
-    // Function to create custom point images with letters
     function createCustomPointImage(color, letter, size = 24) {
       const canvas = document.createElement('canvas');
       canvas.width = size;
       canvas.height = size;
       const ctx = canvas.getContext('2d');
 
-      // Draw outer glow
       const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
       gradient.addColorStop(0, color);
       gradient.addColorStop(0.7, color);
@@ -144,13 +131,11 @@
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, size, size);
 
-      // Draw main circle
       ctx.beginPath();
       ctx.arc(size / 2, size / 2, size / 2 - 2, 0, 2 * Math.PI);
       ctx.fillStyle = color;
       ctx.fill();
 
-      // Draw letter
       ctx.fillStyle = 'black';
       ctx.font = `bold ${size * 0.6}px Arial`;
       ctx.textAlign = 'center';
@@ -160,7 +145,6 @@
       return canvas;
     }
 
-    // Create point images
     const pointImages = {
       C_increase: createCustomPointImage('#00ff88', 'C'),
       C_decrease: createCustomPointImage('#ff4444', 'C'),
@@ -188,10 +172,8 @@
     function initChart() {
       const ctx = document.getElementById('myChart').getContext('2d');
 
-      // Sort points by date
       chartData.points.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-      // Convert to chart format with timestamp positioning
       const data = chartData.points.map(point => ({
         x: new Date(point.date).getTime(),
         y: point.value,
@@ -277,7 +259,6 @@
                   `;
                 }
 
-                // Position tooltip
                 const chartContainer = context.chart.canvas.parentNode;
                 const chartArea = context.chart.chartArea;
                 const tooltipWidth = 220;
@@ -323,7 +304,6 @@
                   size: 12
                 },
                 callback: function (value, index, values) {
-                  // Convert timestamp back to readable date
                   const date = new Date(value);
                   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                   return months[date.getMonth()];
@@ -354,10 +334,8 @@
       });
     }
 
-    // Initialize chart on page load
     initChart();
 
-    // Add hover effects
     document.getElementById('myChart').addEventListener('mousemove', function (e) {
       this.style.filter = 'drop-shadow(0 0 20px rgba(0, 255, 136, 0.3))';
     });
