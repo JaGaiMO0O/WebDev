@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Chart Replica</title>
+  <title>Dynamic Chart Replica - Fixed Tooltips</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <style>
     body {
@@ -22,6 +22,7 @@
       border-radius: 15px;
       padding: 30px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      position: relative; /* Added for proper tooltip positioning */
     }
 
     .chart-container {
@@ -41,14 +42,16 @@
     }
 
     .tooltip-box {
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.95);
       border: 2px solid #333;
       border-radius: 8px;
       padding: 15px;
       color: white;
       font-size: 14px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(10px);
+      min-width: 200px;
+      pointer-events: none;
     }
 
     .tooltip-header {
@@ -74,6 +77,14 @@
 
     .negative {
       color: #ff4444;
+    }
+
+    /* Improved tooltip positioning */
+    .chartjs-tooltip {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1000;
+      transition: all 0.1s ease;
     }
   </style>
 </head>
@@ -134,55 +145,10 @@
       return canvas;
     }
 
-    // Alternative: Function to load external images
-    function loadCustomImage(src) {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = src;
-      });
-    }
-
-    // Initialize custom point images - smaller size
+    // Initialize custom point images
     pointImages.increase = createCustomPointImage('#00ff88', 16);
     pointImages.decrease = createCustomPointImage('#ff4444', 16);
     pointImages.neutral = createCustomPointImage('#666666', 16);
-
-    // Calculate segments with colors
-    function getSegmentColors(values) {
-      const colors = [];
-      for (let i = 1; i < values.length; i++) {
-        if (values[i] > values[i - 1]) {
-          colors.push('#00ff88'); // Green for increase
-        } else {
-          colors.push('#ff4444'); // Red for decrease
-        }
-      }
-      return colors;
-    }
-
-    // Create gradient for line segments
-    function createGradientSegments(ctx, chartArea, values) {
-      const segments = [];
-      const colors = getSegmentColors(values);
-
-      for (let i = 0; i < colors.length; i++) {
-        segments.push({
-          backgroundColor: colors[i],
-          borderColor: colors[i],
-          pointBackgroundColor: colors[i],
-          pointBorderColor: colors[i],
-          pointHoverBackgroundColor: colors[i],
-          pointHoverBorderColor: '#fff',
-          segment: {
-            borderColor: colors[i],
-            backgroundColor: colors[i]
-          }
-        });
-      }
-      return segments;
-    }
 
     const ctx = document.getElementById('myChart').getContext('2d');
 
@@ -194,9 +160,9 @@
           label: 'Portfolio Value',
           data: chartData.values,
           borderWidth: 4,
-          pointRadius: 8, // Reduced from 12 to 8
-          pointHoverRadius: 10, // Reduced from 16 to 10
-          pointBorderWidth: 0, // Remove border for custom images
+          pointRadius: 8,
+          pointHoverRadius: 10,
+          pointBorderWidth: 0,
           pointHoverBorderWidth: 0,
           fill: false,
           tension: 0.4,
@@ -222,7 +188,7 @@
               return pointImages.neutral;
             }
           },
-          pointBackgroundColor: 'transparent', // Make background transparent for custom images
+          pointBackgroundColor: 'transparent',
           pointBorderColor: 'transparent'
         }]
       },
@@ -236,7 +202,6 @@
           tooltip: {
             enabled: false,
             external: function (context) {
-              // Custom tooltip implementation with responsive positioning
               const tooltipEl = getOrCreateTooltip(context.chart);
               const tooltipModel = context.tooltip;
 
@@ -255,59 +220,56 @@
                 const changePercent = dataIndex > 0 ? ((change / prevValue) * 100).toFixed(2) : 0;
 
                 tooltipEl.innerHTML = `
-                                    <div class="tooltip-box">
-                                        <div class="tooltip-header">${date}</div>
-                                        <div class="tooltip-header">CoinFlip</div>
-                                        <div class="tooltip-value">${value.toLocaleString()}</div>
-                                        <div class="tooltip-change ${change >= 0 ? 'positive' : 'negative'}">
-                                            ${change >= 0 ? '▲' : '▼'} ${Math.abs(change).toLocaleString()} (${Math.abs(changePercent)}%)
-                                        </div>
-                                        <div style="margin-top: 10px; font-size: 12px; color: #666;">Total lost</div>
-                                        <button style="background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin-top: 8px; width: 100%; cursor: pointer;">VIEW</button>
-                                    </div>
-                                `;
+                  <div class="tooltip-box">
+                    <div class="tooltip-header">${date}</div>
+                    <div class="tooltip-header">CoinFlip</div>
+                    <div class="tooltip-value">${value.toLocaleString()}</div>
+                    <div class="tooltip-change ${change >= 0 ? 'positive' : 'negative'}">
+                      ${change >= 0 ? '▲' : '▼'} ${Math.abs(change).toLocaleString()} (${Math.abs(changePercent)}%)
+                    </div>
+                    <div style="margin-top: 10px; font-size: 12px; color: #666;">Total ${change >= 0 ? 'gain' : 'lost'}</div>
+                    <button style="background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin-top: 8px; width: 100%; cursor: pointer;">VIEW</button>
+                  </div>
+                `;
               }
 
-              // Get current canvas position (updates on resize)
-              const canvasRect = context.chart.canvas.getBoundingClientRect();
+              // FIXED POSITIONING LOGIC
+              const chartContainer = context.chart.canvas.parentNode;
+              const containerRect = chartContainer.getBoundingClientRect();
               const chartArea = context.chart.chartArea;
+              
+              // Calculate position within the chart container
+              const tooltipWidth = 220; // Approximate tooltip width
+              const tooltipHeight = 140; // Approximate tooltip height
+              
+              // Position relative to chart area, not canvas
+              let positionX = tooltipModel.caretX;
+              let positionY = tooltipModel.caretY;
+              
+              // Boundary checking within chart container
+              if (positionX + tooltipWidth > chartArea.right) {
+                positionX = tooltipModel.caretX - tooltipWidth - 20;
+              } else {
+                positionX = tooltipModel.caretX + 20;
+              }
+              
+              if (positionY - tooltipHeight < chartArea.top) {
+                positionY = tooltipModel.caretY + 20;
+              } else {
+                positionY = tooltipModel.caretY - tooltipHeight - 20;
+              }
+              
+              // Ensure tooltip stays within chart bounds
+              positionX = Math.max(chartArea.left, Math.min(positionX, chartArea.right - tooltipWidth));
+              positionY = Math.max(chartArea.top, Math.min(positionY, chartArea.bottom - tooltipHeight));
 
-              // Calculate tooltip position relative to the chart
-              let tooltipX = canvasRect.left + tooltipModel.caretX;
-              let tooltipY = canvasRect.top + tooltipModel.caretY - 120; // Offset above the point
-
-              // Get tooltip dimensions
+              // Apply positioning
               tooltipEl.style.opacity = 1;
               tooltipEl.style.position = 'absolute';
-              tooltipEl.style.left = tooltipX + 'px';
-              tooltipEl.style.top = tooltipY + 'px';
+              tooltipEl.style.left = positionX + 'px';
+              tooltipEl.style.top = positionY + 'px';
               tooltipEl.style.pointerEvents = 'none';
               tooltipEl.style.zIndex = '1000';
-
-              // Adjust position to keep tooltip within viewport
-              const tooltipRect = tooltipEl.getBoundingClientRect();
-              const viewportWidth = window.innerWidth;
-              const viewportHeight = window.innerHeight;
-
-              // Adjust horizontal position
-              if (tooltipRect.right > viewportWidth - 10) {
-                tooltipX = viewportWidth - tooltipRect.width - 10;
-                tooltipEl.style.left = tooltipX + 'px';
-              }
-              if (tooltipRect.left < 10) {
-                tooltipX = 10;
-                tooltipEl.style.left = tooltipX + 'px';
-              }
-
-              // Adjust vertical position
-              if (tooltipRect.top < 10) {
-                tooltipY = canvasRect.top + tooltipModel.caretY + 20; // Show below point instead
-                tooltipEl.style.top = tooltipY + 'px';
-              }
-              if (tooltipRect.bottom > viewportHeight - 10) {
-                tooltipY = viewportHeight - tooltipRect.height - 10;
-                tooltipEl.style.top = tooltipY + 'px';
-              }
             }
           }
         },
@@ -345,99 +307,32 @@
       }
     });
 
-    // Example: Loading external images (uncomment and modify as needed)
-    /*
-    async function initializeWithExternalImages() {
-        try {
-            pointImages.increase = await loadCustomImage('path/to/your/increase-icon.png');
-            pointImages.decrease = await loadCustomImage('path/to/your/decrease-icon.png');
-            pointImages.neutral = await loadCustomImage('path/to/your/neutral-icon.png');
-            
-            // Update the chart after images are loaded
-            myChart.update();
-        } catch (error) {
-            console.error('Failed to load custom images:', error);
-        }
-    }
-    
-    // Call this function if you want to use external images
-    // initializeWithExternalImages();
-    */
-
-    // Example: Creating different custom shapes
-    function createArrowUpImage(color, size = 24) {
-      const canvas = document.createElement('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
-
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.moveTo(size / 2, 4);
-      ctx.lineTo(size - 4, size - 4);
-      ctx.lineTo(size / 2 + 4, size - 4);
-      ctx.lineTo(size / 2 + 4, size / 2);
-      ctx.lineTo(size / 2 - 4, size / 2);
-      ctx.lineTo(size / 2 - 4, size - 4);
-      ctx.lineTo(4, size - 4);
-      ctx.closePath();
-      ctx.fill();
-
-      return canvas;
-    }
-
-    function createArrowDownImage(color, size = 24) {
-      const canvas = document.createElement('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext('2d');
-
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.moveTo(size / 2, size - 4);
-      ctx.lineTo(4, 4);
-      ctx.lineTo(size / 2 - 4, 4);
-      ctx.lineTo(size / 2 - 4, size / 2);
-      ctx.lineTo(size / 2 + 4, size / 2);
-      ctx.lineTo(size / 2 + 4, 4);
-      ctx.lineTo(size - 4, 4);
-      ctx.closePath();
-      ctx.fill();
-
-      return canvas;
-    }
-
-    // Uncomment these lines to use smaller arrow shapes instead of circles
-    // pointImages.increase = createArrowUpImage('#00ff88', 16);
-    // pointImages.decrease = createArrowDownImage('#ff4444', 16);
-
     function getOrCreateTooltip(chart) {
-      // Look for existing tooltip in the chart container (not document)
+      // Create tooltip within the chart container, not canvas parent
       const chartContainer = chart.canvas.parentNode;
       let tooltipEl = chartContainer.querySelector('.chartjs-tooltip');
 
       if (!tooltipEl) {
         tooltipEl = document.createElement('div');
         tooltipEl.className = 'chartjs-tooltip';
-        // Append to chart container, not canvas parent
         chartContainer.appendChild(tooltipEl);
       }
 
       return tooltipEl;
     }
 
-    // Add some hover effects and animations
+    // Add hover effects
     ctx.canvas.addEventListener('mousemove', function (e) {
-      const rect = ctx.canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Add subtle glow effect on hover
       ctx.canvas.style.filter = 'drop-shadow(0 0 20px rgba(0, 255, 136, 0.3))';
     });
 
     ctx.canvas.addEventListener('mouseleave', function () {
       ctx.canvas.style.filter = 'none';
+    });
+
+    // Handle window resize to update tooltip positioning
+    window.addEventListener('resize', function() {
+      myChart.resize();
     });
   </script>
 </body>
