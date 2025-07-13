@@ -69,9 +69,9 @@
       color: #ff4444;
     }
 
-    .neutral {
+    /* .neutral {
       color: #666666;
-    }
+    } */
 
     .chartjs-tooltip {
       position: absolute;
@@ -136,7 +136,7 @@
       ctx.fillStyle = color;
       ctx.fill();
 
-      ctx.fillStyle = 'black';
+      ctx.fillStyle = 'white';
       ctx.font = `bold ${size * 0.6}px Arial`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
@@ -146,12 +146,9 @@
     }
 
     const pointImages = {
-      C_increase: createCustomPointImage('#00ff88', 'C'),
-      C_decrease: createCustomPointImage('#ff4444', 'C'),
-      C_neutral: createCustomPointImage('#666666', 'C'),
-      J_increase: createCustomPointImage('#00ff88', 'J'),
-      J_decrease: createCustomPointImage('#ff4444', 'J'),
-      J_neutral: createCustomPointImage('#666666', 'J')
+      C: createCustomPointImage('#FFD700', 'C'),
+      J: createCustomPointImage('#00ff88', 'J'),
+
     };
 
     let myChart;
@@ -205,13 +202,8 @@
               const index = ctx.dataIndex;
               const point = data[index];
 
-              if (index === 0) return pointImages[point.type + '_neutral'];
 
-              const current = point.y;
-              const previous = data[index - 1].y;
-              const trend = current > previous ? 'increase' : current < previous ? 'decrease' : 'neutral';
-
-              return pointImages[point.type + '_' + trend];
+              return pointImages[point.type];
             },
             pointBackgroundColor: 'transparent',
             pointBorderColor: 'transparent'
