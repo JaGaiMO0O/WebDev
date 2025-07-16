@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organic Wireframe Symphony</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(ellipse at center, #0a0e1a 0%, #1a2332 30%, #0f1419 70%, #000508 100%);
+      font-family: 'Arial', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wireframe-canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .flow-path {
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 8px currentColor);
+      opacity: 0;
+    }
+
+    .flow-path.primary {
+      stroke: #4a90e2;
+      stroke-width: 3;
+    }
+
+    .flow-path.secondary {
+      stroke: #7b68ee;
+      stroke-width: 2;
+    }
+
+    .flow-path.accent {
+      stroke: #40e0d0;
+      stroke-width: 2;
+    }
+
+    .flow-path.highlight {
+      stroke: #ff6b9d;
+      stroke-width: 1.5;
+    }
+
+    .energy-particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #40e0d0, transparent);
+      opacity: 0;
+      box-shadow: 0 0 15px #40e0d0;
+    }
+
+    .logo-container {
+      position: relative;
+      z-index: 100;
+      text-align: center;
+    }
+
+    .logo-symbol {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 40px;
+      position: relative;
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    .logo-outer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #4a90e2 0%, #7b68ee 50%, #40e0d0 100%);
+      border-radius: 25px;
+      transform: rotate(45deg);
+      box-shadow: 0 0 40px rgba(74, 144, 226, 0.4);
+    }
+
+    .logo-inner {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(225deg, #1a1a2e 0%, #0f0f23 100%);
+      border-radius: 18px;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-core {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #40e0d0, #4a90e2);
+      border-radius: 50%;
+      opacity: 0;
+      animation: pulse-glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        box-shadow: 0 0 20px #40e0d0;
+        transform: scale(1);
+      }
+
+      100% {
+        box-shadow: 0 0 40px #40e0d0, 0 0 60px rgba(64, 224, 208, 0.3);
+        transform: scale(1.1);
+      }
+    }
+
+    .company-text {
+      color: #ffffff;
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      transform: translateY(50px);
+      margin-bottom: 15px;
+    }
+
+    .company-text .highlight {
+      background: linear-gradient(45deg, #4a90e2, #7b68ee, #40e0d0, #ff6b9d);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-shift 3s ease infinite;
+    }
+
+    @keyframes gradient-shift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .subtitle {
+      color: #7b68ee;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .energy-wave {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .wave-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 2px solid #4a90e2;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+
+    .interaction-zone {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 300px;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .interaction-zone:hover {
+      background: radial-gradient(circle, rgba(74, 144, 226, 0.1), transparent 70%);
+    }
+
+    .control-interface {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 25px;
+      z-index: 100;
+    }
+
+    .control-btn {
+      background: linear-gradient(45deg, rgba(74, 144, 226, 0.8), rgba(123, 104, 238, 0.8));
+      color: white;
+      border: 2px solid rgba(74, 144, 226, 0.3);
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .control-btn:hover {
+      transform: translateY(0) scale(1.05);
+      box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+      border-color: rgba(74, 144, 226, 0.8);
+    }
+
+    .morphing-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%),
+          rgba(74, 144, 226, 0.1) 0%,
+          rgba(123, 104, 238, 0.05) 50%,
+          transparent 70%);
+      transition: all 0.5s ease;
+      pointer-events: none;
+    }
+
+    .status-indicator {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: #40e0d0;
+      font-size: 14px;
+      opacity: 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    .floating-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .float-element {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, #ff6b9d, transparent);
+      border-radius: 50%;
+      opacity: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="morphing-bg"></div>
+
+    <svg class="wireframe-canvas" viewBox="0 0 1400 800">
+      <!-- Left flowing structure -->
+      <path class="flow-path primary"
+        d="M100,200 Q300,100 500,200 T800,300 Q600,400 400,350 T100,400 Q200,300 300,250 T500,300 Q350,350 200,300 T100,200" />
+
+      <path class="flow-path secondary"
+        d="M50,150 Q200,50 400,150 T700,250 Q550,350 350,300 T50,350 Q150,250 250,200 T450,250 Q300,300 150,250 T50,150" />
+
+      <path class="flow-path accent"
+        d="M150,250 Q350,150 550,250 T850,350 Q700,450 500,400 T200,450 Q300,350 400,300 T600,350 Q450,400 300,350 T150,250" />
+
+      <!-- Right flowing structure -->
+      <path class="flow-path primary"
+        d="M1300,200 Q1100,100 900,200 T600,300 Q800,400 1000,350 T1300,400 Q1200,300 1100,250 T900,300 Q1050,350 1200,300 T1300,200" />
+
+      <path class="flow-path secondary"
+        d="M1350,150 Q1200,50 1000,150 T700,250 Q850,350 1050,300 T1350,350 Q1250,250 1150,200 T950,250 Q1100,300 1250,250 T1350,150" />
+
+      <path class="flow-path highlight"
+        d="M1250,250 Q1050,150 850,250 T550,350 Q700,450 900,400 T1200,450 Q1100,350 1000,300 T800,350 Q950,400 1100,350 T1250,250" />
+
+      <!-- Top radiating lines -->
+      <path class="flow-path accent" d="M700,50 Q750,150 800,250 T900,450" stroke-width="1" />
+      <path class="flow-path secondary" d="M650,30 Q700,130 750,230 T850,430" stroke-width="1" />
+      <path class="flow-path primary" d="M750,30 Q800,130 850,230 T950,430" stroke-width="1" />
+      <path class="flow-path highlight" d="M600,70 Q650,170 700,270 T800,470" stroke-width="1" />
+      <path class="flow-path accent" d="M800,70 Q850,170 900,270 T1000,470" stroke-width="1" />
+
+      <!-- Connecting web -->
+      <path class="flow-path highlight" d="M200,300 Q400,200 600,300 T1000,400 Q800,300 600,350 T200,400"
+        stroke-width="1" />
+      <path class="flow-path secondary" d="M300,250 Q500,150 700,250 T1100,350 Q900,250 700,300 T300,350"
+        stroke-width="1" />
+    </svg>
+
+    <div class="energy-wave">
+      <div class="wave-ring" style="width: 200px; height: 200px;"></div>
+      <div class="wave-ring" style="width: 400px; height: 400px;"></div>
+      <div class="wave-ring" style="width: 600px; height: 600px;"></div>
+    </div>
+
+    <div class="floating-elements"></div>
+
+    <div class="logo-container">
+      <div class="logo-symbol">
+        <div class="logo-outer"></div>
+        <div class="logo-inner">
+          <div class="logo-core"></div>
+        </div>
+      </div>
+      <div class="company-text">
+        <span class="highlight">Artl</span> Studio LLC
+      </div>
+      <div class="subtitle">Creative Technology</div>
+    </div>
+
+    <div class="interaction-zone" onclick="triggerEnergyBurst()"></div>
+
+    <div class="status-indicator">
+      <div>◉ SYSTEM ACTIVE</div>
+      <div>◉ FLOW STABILIZED</div>
+      <div>◉ ENERGY OPTIMAL</div>
+    </div>
+
+    <div class="control-interface">
+      <button class="control-btn" onclick="activateFlow()">Activate Flow</button>
+      <button class="control-btn" onclick="energyBurst()">Energy Burst</button>
+      <button class="control-btn" onclick="resetSystem()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    let isActive = false;
+    let flowAnimation;
+
+    function createFloatingElements() {
+      const container = document.querySelector('.floating-elements');
+
+      for (let i = 0; i < 40; i++) {
+        const element = document.createElement('div');
+        element.className = 'float-element';
+        element.style.left = Math.random() * 100 + '%';
+        element.style.top = Math.random() * 100 + '%';
+        container.appendChild(element);
+
+        anime({
+          targets: element,
+          opacity: [0, 1, 0],
+          translateX: (Math.random() - 0.5) * 300,
+          translateY: (Math.random() - 0.5) * 300,
+          scale: [0, 1, 0],
+          duration: 4000 + Math.random() * 2000,
+          delay: Math.random() * 2000,
+          loop: true,
+          easing: 'easeInOutSine'
+        });
+      }
+    }
+
+    function createEnergyParticles() {
+      const container = document.querySelector('.container');
+
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'energy-particle';
+        container.appendChild(particle);
+
+        // Follow the path curves
+        const paths = document.querySelectorAll('.flow-path');
+        const randomPath = paths[Math.floor(Math.random() * paths.length)];
+        const pathLength = randomPath.getTotalLength();
+
+        anime({
+          targets: particle,
+          opacity: [0, 1, 0],
+          duration: 3000,
+          loop: true,
+          delay: Math.random() * 3000,
+          update: function (anim) {
+            const progress = anim.progress / 100;
+            const point = randomPath.getPointAtLength(progress * pathLength);
+            particle.style.left = point.x + 'px';
+            particle.style.top = point.y + 'px';
+          }
+        });
+      }
+    }
+
+    function activateFlow() {
+      if (isActive) return;
+      isActive = true;
+
+      // Main activation sequence
+      const tl = anime.timeline({
+        easing: 'easeOutExpo'
+      });
+
+      // Wave rings
+      tl.add({
+        targets: '.wave-ring',
+        opacity: [0, 0.8, 0],
+        scale: [0, 1.5],
+        duration: 2000,
+        delay: anime.stagger(300),
+        easing: 'easeOutCirc'
+      }, 0);
+
+      // Flow paths drawing
+      tl.add({
+        targets: '.flow-path',
+        strokeDasharray: function (el) {
+          return [0, el.getTotalLength()];
+        },
+        strokeDashoffset: function (el) {
+          return -el.getTotalLength();
+        },
+        opacity: [0, 1],
+        duration: 2500,
+        delay: anime.stagger(200),
+        easing: 'easeInOutSine'
+      }, 200);
+
+      // Logo symbol
+      tl.add({
+        targets: '.logo-symbol',
+        opacity: [0, 1],
+        scale: [0, 1],
+        rotate: [45, 0],
+        duration: 1200,
+        easing: 'easeOutBack'
+      }, 800);
+
+      // Logo core
+      tl.add({
+        targets: '.logo-core',
+        opacity: [0, 1],
+        scale: [0, 1],
+        duration: 800,
+        easing: 'easeOutBack'
+      }, 1200);
+
+      // Company text
+      tl.add({
+        targets: '.company-text',
+        opacity: [0, 1],
+        translateY: [50, 0],
+        duration: 1000,
+        easing: 'easeOutExpo'
+      }, 1400);
+
+      // Subtitle
+      tl.add({
+        targets: '.subtitle',
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 800,
+        easing: 'easeOutExpo'
+      }, 1600);
+
+      // Status indicator
+      tl.add({
+        targets: '.status-indicator',
+        opacity: [0, 1],
+        translateX: [30, 0],
+        duration: 600
+      }, 1800);
+
+      // Controls
+      tl.add({
+        targets: '.control-btn',
+        opacity: [0, 1],
+        translateY: [30, 0],
+        duration: 500,
+        delay: anime.stagger(100)
+      }, 2000);
+
+      // Continuous flow animations
+      setTimeout(() => {
+        startContinuousFlow();
+      }, 2500);
+    }
+
+    function startContinuousFlow() {
+      // Continuous path color shifting
+      anime({
+        targets: '.flow-path.primary',
+        stroke: [
+          { value: '#4a90e2' },
+          { value: '#7b68ee' },
+          { value: '#40e0d0' },
+          { value: '#4a90e2' }
+        ],
+        duration: 4000,
+        loop: true,
+        easing: 'easeInOutSine'
+      });
+
+      anime({
+        targets: '.flow-path.secondary',
+        stroke: [
+          { value: '#7b68ee' },
+          { value: '#40e0d0' },
+          { value: '#ff6b9d' },
+          { value: '#7b68ee' }
+        ],
+        duration: 5000,
+        loop: true,
+        easing: 'easeInOutSine'
+      });
+
+      anime({
+        targets: '.flow-path.accent',
+        stroke: [
+          { value: '#40e0d0' },
+          { value: '#ff6b9d' },
+          { value: '#4a90e2' },
+          { value: '#40e0d0' }
+        ],
+        duration: 6000,
+        loop: true,
+        easing: 'easeInOutSine'
+      });
+    }
+
+    function energyBurst() {
+      anime({
+        targets: '.wave-ring',
+        opacity: [0, 1, 0],
+        scale: [0, 2],
+        duration: 1000,
+        delay: anime.stagger(100),
+        easing: 'easeOutCirc'
+      });
+
+      anime({
+        targets: '.flow-path',
+        strokeWidth: [2, 6, 2],
+        duration: 600,
+        easing: 'easeInOutQuad'
+      });
+    }
+
+    function triggerEnergyBurst() {
+      energyBurst();
+
+      // Logo pulse effect
+      anime({
+        targets: '.logo-symbol',
+        scale: [1, 1.2, 1],
+        duration: 400,
+        easing: 'easeInOutQuad'
+      });
+    }
+
+    function resetSystem() {
+      isActive = false;
+
+      anime({
+        targets: '.flow-path, .logo-symbol, .company-text, .subtitle, .status-indicator, .control-btn',
+        opacity: 0,
+        scale: 0,
+        duration: 800,
+        easing: 'easeInExpo',
+        complete: function () {
+          setTimeout(() => {
+            activateFlow();
+          }, 500);
+        }
+      });
+    }
+
+    // Mouse interaction
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+
+      document.documentElement.style.setProperty('--x', x + '%');
+      document.documentElement.style.setProperty('--y', y + '%');
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function () {
+      createFloatingElements();
+      createEnergyParticles();
+
+      setTimeout(() => {
+        activateFlow();
+      }, 1000);
+    });
+  </script>
+</body>
+
+</html>
