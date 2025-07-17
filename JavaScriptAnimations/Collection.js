@@ -1,234 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
+// Create background particles
+function createBackgroundParticles() {
+  const container = document.getElementById('backgroundParticles');
+  const particleCount = 60;
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #0a0f1c 0%, #1a2332 50%, #0f1b2a 100%);
-      font-family: 'Arial', sans-serif;
-      overflow: hidden;
-    }
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 25 + 's';
+    particle.style.animationDuration = (20 + Math.random() * 10) + 's';
+    container.appendChild(particle);
+  }
+}
 
-    .loader-container {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
+// Loading text messages
+const loadingMessages = [
+  'Loading...',
+  'Initializing...',
+  'Zaid is Coding...',
+  'Almost ready...',
+  'Finalizing...'
+];
+let messageIndex = 0;
+let loadingInterval;
 
-    .logo-container {
-      position: relative;
-      z-index: 10;
-      margin-bottom: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+function updateLoadingText() {
+  const loadingText = document.getElementById('loadingText');
+  loadingText.textContent = loadingMessages[messageIndex];
+  messageIndex = (messageIndex + 1) % loadingMessages.length;
+}
 
-    .logo {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(45deg, #4a6cf7 0%, #00d4ff 50%, #00ff88 100%);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      font-weight: bold;
-      color: white;
-      animation: logoFloat 3s ease-in-out infinite;
-      box-shadow: 0 10px 30px rgba(74, 108, 247, 0.3);
-    }
+// Show animation function
+function showAnimation(type) {
+  const overlay = document.getElementById('loadingOverlay');
+  const container = document.getElementById('animationContainer');
 
-    .company-name {
-      color: white;
-      font-size: 24px;
-      font-weight: 300;
-      text-align: center;
-      margin-top: 20px;
-      opacity: 0.9;
-    }
+  overlay.classList.add('active');
 
-    .loading-text {
-      background: linear-gradient(180deg, rgba(21, 243, 175, 0.2) 0%, rgba(104, 110, 218, 0.4) 44.5%, rgba(104, 110, 218, 0.4) 100%);
-      color: transparent;
-      background-clip: text;
-      font-size: 14px;
-      margin-top: 14px;
-      animation: pulse 2s ease-in-out infinite;
-    }
+  // Start loading text rotation
+  loadingInterval = setInterval(updateLoadingText, 1500);
 
-    .progress-bar {
-      width: 200px;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
-      margin-top: 20px;
-      overflow: hidden;
-    }
+  // Clear previous animation
+  container.innerHTML = '';
 
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #4a6cf7, #00d4ff, #00ff88);
-      border-radius: 2px;
-      animation: progressFlow 3s ease-in-out infinite;
-    }
+  switch (type) {
+    case 'orbital':
+      createOrbitalSystem(container);
+      break;
+    case 'quantum':
+      createQuantumNetwork(container);
+      break;
+    case 'neural':
+      createNeuralWave(container);
+      break;
+    case 'dna':
+      createDNAHelix(container);
+      break;
+    case 'spiral':
+      createHypnoticSpiral(container);
+      break;
+    case 'morph':
+      createMorphingGeometry(container);
+      break;
+  }
+}
 
-    @keyframes logoFloat {
+function hideAnimation() {
+  const overlay = document.getElementById('loadingOverlay');
+  overlay.classList.remove('active');
+  clearInterval(loadingInterval);
+}
 
-      0%,
-      100% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 0.5;
-      }
-
-      50% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes progressFlow {
-      0% {
-        width: 0%;
-      }
-
-      50% {
-        width: 70%;
-      }
-
-      100% {
-        width: 100%;
-      }
-    }
-
-    @keyframes flowingLines {
-      0% {
-        stroke-dashoffset: 1000;
-        opacity: 0;
-      }
-
-      50% {
-        opacity: 1;
-      }
-
-      100% {
-        stroke-dashoffset: 0;
-        opacity: 0.7;
-      }
-    }
-
-    @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .flowing-lines {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-
-    .line-path {
-      fill: none;
-      stroke-width: 2;
-      stroke-dasharray: 100;
-      animation: flowingLines 4s ease-in-out infinite;
-    }
-
-    .line-1 {
-      stroke: url(#gradient1);
-      animation-delay: 0s;
-    }
-
-    .line-2 {
-      stroke: url(#gradient2);
-      animation-delay: 0.5s;
-    }
-
-    .line-3 {
-      stroke: url(#gradient3);
-      animation-delay: 1s;
-    }
-
-    .line-4 {
-      stroke: url(#gradient4);
-      animation-delay: 1.5s;
-    }
-
-    .orbital-rings {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      z-index: 2;
-    }
-
-    .ring {
-      position: absolute;
-      border: 1px solid rgba(74, 108, 247, 0.3);
-      border-radius: 50%;
-      animation: rotate 20s linear infinite;
-    }
-
-    .ring-1 {
-      width: 200px;
-      height: 200px;
-      top: 50px;
-      left: 50px;
-      border-color: rgba(74, 108, 247, 0.4);
-    }
-
-    .ring-2 {
-      width: 250px;
-      height: 250px;
-      top: 25px;
-      left: 25px;
-      border-color: rgba(0, 212, 255, 0.3);
-      animation-direction: reverse;
-      animation-duration: 30s;
-    }
-
-    .ring-3 {
-      width: 300px;
-      height: 300px;
-      top: 0;
-      left: 0;
-      border-color: rgba(0, 255, 136, 0.2);
-      animation-duration: 40s;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="loader-container">
+// Animation 1: Orbital System
+function createOrbitalSystem(container) {
+  container.innerHTML = `
+                  <div class="loader-container">
     <div class="orbital-rings">
       <div class="ring ring-1"></div>
       <div class="ring ring-2"></div>
@@ -365,30 +211,327 @@
       </div>
     </div>
   </div>
+            `;
 
-  <script>
-    const loadingText = document.querySelector('.loading-text');
-    const loadingMessages = ['Loading...', 'Initializing...', 'Preparing...', 'Almost ready...'];
-    let messageIndex = 0;
+  // Add mouse interaction
+  document.addEventListener('mousemove', handleOrbitalMouseMove);
+}
 
-    function updateLoadingText() {
-      loadingText.textContent = loadingMessages[messageIndex];
-      messageIndex = (messageIndex + 1) % loadingMessages.length;
+function handleOrbitalMouseMove(e) {
+  const rings = document.querySelectorAll('.orbital-ring');
+  const mouseX = e.clientX / window.innerWidth - 0.5;
+  const mouseY = e.clientY / window.innerHeight - 0.5;
+
+  rings.forEach((ring, index) => {
+    const speed = (index + 1) * 0.15;
+    ring.style.transform = `translate(${mouseX * speed * 30}px, ${mouseY * speed * 30}px)`;
+  });
+}
+
+// Animation 2: Quantum Network
+function createQuantumNetwork(container) {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'quantum-canvas';
+  canvas.width = 400;
+  canvas.height = 400;
+  container.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  const particles = [];
+  const particleCount = 50;
+
+  // Initialize particles
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 2,
+      vy: (Math.random() - 0.5) * 2,
+      size: Math.random() * 4 + 2,
+      hue: Math.random() * 60 + 200,
+      life: Math.random() * 100 + 100
+    });
+  }
+
+  function animateQuantum() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((particle, index) => {
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+      particle.life--;
+
+      // Bounce off edges
+      if (particle.x <= 0 || particle.x >= canvas.width) particle.vx *= -1;
+      if (particle.y <= 0 || particle.y >= canvas.height) particle.vy *= -1;
+
+      // Draw connections
+      particles.forEach((otherParticle, otherIndex) => {
+        if (index !== otherIndex) {
+          const dx = particle.x - otherParticle.x;
+          const dy = particle.y - otherParticle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(otherParticle.x, otherParticle.y);
+            ctx.strokeStyle = `hsla(${particle.hue}, 100%, 70%, ${0.4 * (1 - distance / 100)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      });
+
+      // Draw particle
+      const gradient = ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.size * 2);
+      gradient.addColorStop(0, `hsla(${particle.hue}, 100%, 70%, 0.8)`);
+      gradient.addColorStop(1, `hsla(${particle.hue}, 100%, 70%, 0)`);
+
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${particle.hue}, 100%, 80%, 0.9)`;
+      ctx.fill();
+
+      // Regenerate particle
+      if (particle.life <= 0) {
+        particle.x = Math.random() * canvas.width;
+        particle.y = Math.random() * canvas.height;
+        particle.vx = (Math.random() - 0.5) * 2;
+        particle.vy = (Math.random() - 0.5) * 2;
+        particle.life = Math.random() * 100 + 100;
+        particle.hue = Math.random() * 60 + 200;
+      }
+    });
+
+    requestAnimationFrame(animateQuantum);
+  }
+
+  animateQuantum();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const container = document.getElementById('quantum-container');
+  createQuantumNetwork(container);
+});
+
+// Animation 3: Neural Wave
+function createNeuralWave(container) {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'neural-canvas';
+  canvas.width = 400;
+  canvas.height = 300;
+  container.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let time = 0;
+
+  const waves = [
+    { amplitude: 20, frequency: 0.02, speed: 0.05, color: '#4facfe', offset: 0 },
+    { amplitude: 25, frequency: 0.015, speed: 0.03, color: '#00f2fe', offset: Math.PI / 4 },
+    { amplitude: 15, frequency: 0.025, speed: 0.07, color: '#7b68ee', offset: Math.PI / 2 },
+    { amplitude: 22, frequency: 0.018, speed: 0.04, color: '#9370db', offset: Math.PI * 3 / 4 },
+    { amplitude: 18, frequency: 0.022, speed: 0.06, color: '#4facfe', offset: Math.PI }
+  ];
+
+  function animateNeural() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    waves.forEach((wave, waveIndex) => {
+      ctx.beginPath();
+
+      const points = [];
+      for (let x = 0; x <= canvas.width; x += 2) {
+        const y = canvas.height / 2 +
+          Math.sin((x * wave.frequency) + (time * wave.speed) + wave.offset) * wave.amplitude +
+          Math.sin((x * wave.frequency * 2) + (time * wave.speed * 1.5) + wave.offset) * wave.amplitude * 0.3;
+        points.push({ x, y });
+
+        if (x === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+
+      // Gradient stroke
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      gradient.addColorStop(0, wave.color + '00');
+      gradient.addColorStop(0.2, wave.color);
+      gradient.addColorStop(0.8, wave.color);
+      gradient.addColorStop(1, wave.color + '00');
+
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 3;
+      ctx.shadowColor = wave.color;
+      ctx.shadowBlur = 15;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Add particles
+      for (let i = 0; i < points.length; i += 25) {
+        const point = points[i];
+        if (point && Math.random() > 0.8) {
+          ctx.beginPath();
+          ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+          ctx.fillStyle = wave.color;
+          ctx.fill();
+        }
+      }
+    });
+
+    time += 0.5;
+    requestAnimationFrame(animateNeural);
+  }
+
+  animateNeural();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('neural-wave');
+  createNeuralWave(container);
+});
+
+// Animation 4: DNA Helix
+function createDNAHelix(container) {
+  const canvas = document.createElement('canvas');
+  canvas.className = 'dna-canvas';
+  canvas.width = 300;
+  canvas.height = 400;
+  container.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  const centerX = canvas.width / 2;
+  let time = 0;
+
+  function animateDNA() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const helixHeight = canvas.height - 40;
+    const helixWidth = 80;
+
+    // Draw DNA strands
+    for (let strand = 0; strand < 2; strand++) {
+      ctx.beginPath();
+
+      for (let y = 20; y < helixHeight; y += 3) {
+        const angle = (y * 0.08) + (time * 0.03) + (strand * Math.PI);
+        const x = centerX + Math.sin(angle) * helixWidth / 2;
+
+        if (y === 20) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+
+      const strandColor = strand === 0 ? '#4facfe' : '#00f2fe';
+      ctx.strokeStyle = strandColor;
+      ctx.lineWidth = 4;
+      ctx.shadowColor = strandColor;
+      ctx.shadowBlur = 10;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
     }
 
-    setInterval(updateLoadingText, 2000);
+    // Draw base pairs
+    for (let y = 30; y < helixHeight - 20; y += 20) {
+      const angle1 = (y * 0.08) + (time * 0.03);
+      const angle2 = angle1 + Math.PI;
 
-    document.addEventListener('mousemove', (e) => {
-      const rings = document.querySelectorAll('.ring');
-      const mouseX = e.clientX / window.innerWidth - 0.5;
-      const mouseY = e.clientY / window.innerHeight - 0.5;
+      const x1 = centerX + Math.sin(angle1) * helixWidth / 2;
+      const x2 = centerX + Math.sin(angle2) * helixWidth / 2;
 
-      rings.forEach((ring, index) => {
-        const speed = (index + 1) * 0.1;
-        ring.style.transform = `translate(${mouseX * speed * 20}px, ${mouseY * speed * 20}px)`;
-      });
-    });
-  </script>
-</body>
+      ctx.beginPath();
+      ctx.moveTo(x1, y);
+      ctx.lineTo(x2, y);
+      ctx.strokeStyle = '#7b68ee';
+      ctx.lineWidth = 3;
+      ctx.stroke();
 
-</html>
+      // Base pair nodes
+      ctx.beginPath();
+      ctx.arc(x1, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#4facfe';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(x2, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#00f2fe';
+      ctx.fill();
+    }
+
+    time++;
+    requestAnimationFrame(animateDNA);
+  }
+
+  animateDNA();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('dna-helix');
+  createDNAHelix(container);
+});
+
+// Animation 5: Hypnotic Spiral
+function createHypnoticSpiral(container) {
+  container.innerHTML = `
+                <div class="hypnotic-spiral">
+                    <div class="spiral-element spiral-1"></div>
+                    <div class="spiral-element spiral-2"></div>
+                    <div class="spiral-element spiral-3"></div>
+                    <div class="spiral-element spiral-4"></div>
+                </div>
+            `;
+}
+
+// Animation 6: Morphing Geometry
+function createMorphingGeometry(container) {
+  container.innerHTML = `
+                <div class="morphing-geometry">
+                    <div class="morph-shape"></div>
+                </div>
+            `;
+}
+
+// Initialize
+window.addEventListener('load', () => {
+  createBackgroundParticles();
+});
+
+// Clean up event listeners when hiding animation
+function hideAnimation() {
+  const overlay = document.getElementById('loadingOverlay');
+  overlay.classList.remove('active');
+  clearInterval(loadingInterval);
+  document.removeEventListener('mousemove', handleOrbitalMouseMove);
+}
+
+
+
+// Animation 1
+
+const loadingText = document.querySelector('.loading-text');
+
+function updateLoadingText() {
+  loadingText.textContent = loadingMessages[messageIndex];
+  messageIndex = (messageIndex + 1) % loadingMessages.length;
+}
+
+setInterval(updateLoadingText, 2000);
+
+document.addEventListener('mousemove', (e) => {
+  const rings = document.querySelectorAll('.ring');
+  const mouseX = e.clientX / window.innerWidth - 0.5;
+  const mouseY = e.clientY / window.innerHeight - 0.5;
+
+  rings.forEach((ring, index) => {
+    const speed = (index + 1) * 0.1;
+    ring.style.transform = `translate(${mouseX * speed * 20}px, ${mouseY * speed * 20}px)`;
+  });
+});
