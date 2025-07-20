@@ -78,7 +78,7 @@ body {
 .animation-showcase {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  gap: 50px;
   margin-bottom: 50px;
 }
 
@@ -90,13 +90,14 @@ body {
   border: 2px solid transparent;
   background-clip: padding-box;
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
   transition: all 0.3s ease;
   height: 400px;
   width: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .animation-demo::before {
@@ -114,9 +115,43 @@ body {
   padding: 2px;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.animation-demo::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgb(0, 208, 255);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ripple-extra {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgb(0, 208, 255);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.animation-demo:hover::after {
+  animation: ripple-multi 2s ease-out infinite;
+}
+
+.animation-demo:hover .ripple-extra {
+  animation: ripple-multi 2s ease-out infinite 0.6s;
 }
 
 @keyframes borderGlow {
@@ -132,8 +167,28 @@ body {
 }
 
 .animation-demo:hover {
-  transform: translateY(-10px) scale(1.02);
+  transform: perspective(500px) rotateX(15deg) translateY(10px);
   box-shadow: 0 20px 40px rgba(79, 172, 254, 0.3);
+}
+
+@keyframes ripple-multi {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 /* Full-screen loading overlay */
